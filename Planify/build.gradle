@@ -22,7 +22,13 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl'
+	implementation 'org.springframework.boot:spring-boot-devtools'
 	
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.projectlombok:lombok:1.18.22'
+    	
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.h2database:h2' // h2 : implementation 
