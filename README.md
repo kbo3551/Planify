@@ -1,14 +1,15 @@
 # Planify
-Todo 프로젝트
+todo 프로젝트
 
-* Spring Boot 2.7.18  
-* JDK 11  
-* Gradle  
-* JPA  
-* Database: H2  
-
-H2 예시:
+Spring boot 2.7.18
 <br>
-![H2 Console]![image](https://user-images.githubusercontent.com/12345678/abcdef123456.png)
+JDK 11
 <br>
-![H2 Query]![image](https://user-images.githubusercontent.com/12345678/123456789abcdef.png)
+Gradle
+<br>
+Database : H2 사용 (embedded)
+<br>예시)
+Database : H2
+<br>H2 예시)
+<br>![image](https://github.com/user-attachments/assets/fd8ab86f-12b5-44ff-9ec7-84aeb1c6b946)
+<br>![image](https://github.com/user-attachments/assets/4d039294-dc0c-4fcc-a5e5-a4bcf19443bc)
