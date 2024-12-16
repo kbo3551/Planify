@@ -5,7 +5,7 @@ Spring boot 2.7.18
 <br>
 JDK 11
 <br>
-gradle
+Gradle
 <br>
 H2 자체DB 사용
 <br>예시)
