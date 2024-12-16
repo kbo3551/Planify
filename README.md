@@ -9,6 +9,6 @@ Todo 프로젝트
 
 H2 예시:
 <br>
-![H2 Console](https://user-images.githubusercontent.com/12345678/abcdef123456.png)
+![H2 Console]![image](https://user-images.githubusercontent.com/12345678/abcdef123456.png)
 <br>
-![H2 Query](https://user-images.githubusercontent.com/12345678/123456789abcdef.png)
+![H2 Query]![image](https://user-images.githubusercontent.com/12345678/123456789abcdef.png)
