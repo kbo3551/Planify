@@ -9,7 +9,7 @@ JPA
 <br>
 Gradle
 <br>
-Database : H2 사용 (embedded)
+Database : H2 
 <br>예시)
 Database : H2
 <br>H2 예시)
