@@ -5,6 +5,8 @@ Spring boot 2.7.18
 <br>
 JDK 11
 <br>
+JPA
+<br>
 Gradle
 <br>
 Database : H2 사용 (embedded)
