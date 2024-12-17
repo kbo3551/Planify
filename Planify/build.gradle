@@ -25,21 +25,20 @@ dependencies {
 	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl'
 	implementation 'org.springframework.boot:spring-boot-devtools'
-	
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// lombok
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.projectlombok:lombok:1.18.22'
-    
-    // H2 & JPA
+    	
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.h2database:h2' // h2 : implementation 
     
-    // tiles
+        // tiles
     implementation 'org.apache.tiles:tiles-core:3.0.8'
     implementation 'org.apache.tiles:tiles-api:3.0.8'
     implementation 'org.apache.tiles:tiles-jsp:3.0.8'
-    
 }
 
 tasks.named('test') {
