@@ -352,3 +352,9 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 50 more
+2024-12-17 15:40:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(1)": "'MALE' (4)"; SQL statement:
+insert into member (member_no, gender, member_id, mod_dt, name, nick_name, password, reg_dt) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2024-12-17 15:46:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(1)": "'MALE' (4)"; SQL statement:
+insert into member (member_no, gender, member_id, mod_dt, name, nick_name, password, reg_dt) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
