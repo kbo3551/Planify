@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 	<!-- script_start -->
-    <script src="/resource/js/bundle/jquery-3.7.1.min.js"></script>
+    <script src="/resources/js/bundle/jquery-3.7.1.min.js"></script>
 
 	<!-- script_end -->
 
