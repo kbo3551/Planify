@@ -1,8 +1,5 @@
 package com.planify.main.api.login.application.dto;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 import com.planify.main.api.member.value.Gender;
 
 import lombok.Builder;
@@ -16,7 +13,7 @@ public class AddMemberDTO {
     private String password;
     private String nickName;
     private String name;
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Builder

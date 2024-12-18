@@ -4,24 +4,28 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Gender {
-    MALE("M"),
-    FEMALE("W");
+	M("MALE"),
+    W("FEMALE");
 
-    private final String code;
+	private final String displayName;
 
-    Gender(String code) {
-        this.code = code;
+	Gender(String displayName) {
+        this.displayName = displayName;
     }
 
-    @JsonValue
-    public String getCode() {
-        return code;
+	public String getCode() {
+        return this.name();
     }
+	
+	@JsonValue
+    public String getDisplayName() {
+        return displayName;
+	}
 
     @JsonCreator
     public static Gender fromCode(String code) {
         for (Gender gender : Gender.values()) {
-            if (gender.code.equalsIgnoreCase(code)) {
+        	if (gender.name().equalsIgnoreCase(code.trim())) {
                 return gender;
             }
         }

@@ -40,9 +40,9 @@ public class Member {
     @Column(name = "name", nullable = false)
     private String name;
 
-//    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false, length = 1)
-    private String gender;
+    @Enumerated(EnumType.STRING) // Enum 값
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
 
     @Column(name = "reg_dt")
     private LocalDateTime regDt;
@@ -56,7 +56,7 @@ public class Member {
         this.password = password;
         this.nickName = nickName;
         this.name = name;
-        this.gender = gender.getCode();
+        this.gender = gender;
         this.regDt = regDt;
         this.modDt = modDt;
     }
