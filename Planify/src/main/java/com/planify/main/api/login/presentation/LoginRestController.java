@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,33 +26,6 @@ public class LoginRestController {
         this.loginService = loginService;
     }
 
-//    // 회원가입
-//    @PostMapping("/register")
-//    public ResponseEntity<String> register(@RequestBody AddMemberDTO addMemberDTO) {
-//        loginService.register(
-//                addMemberDTO.getMemberId(),
-//                addMemberDTO.getPassword(),
-//                addMemberDTO.getNickName(),
-//                addMemberDTO.getName(),
-//                addMemberDTO.getGender()
-//        );
-//        return ResponseEntity.ok("success");
-//    }
-//    @PostMapping("/register")
-//    public ResponseEntity<?> register(@ModelAttribute AddMemberDTO addMemberDTO) {
-//        try {
-//            loginService.register(
-//                    addMemberDTO.getMemberId(),
-//                    addMemberDTO.getPassword(),
-//                    addMemberDTO.getNickName(),
-//                    addMemberDTO.getName(),
-//                    addMemberDTO.getGender()
-//            );
-//            return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
-//        } catch (IllegalArgumentException e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
-//        }
-//    }
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody AddMemberDTO addMemberDTO) {
         try {
