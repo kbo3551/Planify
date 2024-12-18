@@ -16,16 +16,17 @@ com.planify.main
 ├── api
 │   ├── login
 │   ├── member
-│   │   ├── application       // 비즈니스 로직 (Use Case)
+│   │   ├── application       // 비즈니스 로직
 │   │   ├── domain            // 핵심 도메인 모델 (Entity, Repository 인터페이스 등)
 │   │   ├── infrastructure    // 기술적 구현 (JPA Repository 등)
 │   │   ├── presentation      // API 요청/응답 처리 (Controller)
 │   │   └── value             // 값 객체 및 enum 클래스
-│   └── (다른 도메인 패키지 추가 가능)
+│   └── (도메인 패키지 추가)
 ├── config
 │   ├── security              // 보안 설정 (Spring Security)
 │   └── tiles                 // Tiles 뷰 레이아웃 설정
-├── web                       // View를 렌더링하는 컨트롤러 (JSP 연동)
+│   └── (설정 패키지 추가)
+├── web                       // View를 렌더링하는 컨트롤러 (JSP, Thymeleaf)
     </pre>
     <hr>
     <h2>설계 원칙</h2>
