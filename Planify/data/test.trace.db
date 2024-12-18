@@ -358,3 +358,6 @@ insert into member (member_no, gender, member_id, mod_dt, name, nick_name, passw
 2024-12-17 15:46:18 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "GENDER CHARACTER VARYING(1)": "'MALE' (4)"; SQL statement:
 insert into member (member_no, gender, member_id, mod_dt, name, nick_name, password, reg_dt) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2024-12-18 14:54:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found (this database is empty); SQL statement:
+select member0_.member_no as member_n1_0_, member0_.gender as gender2_0_, member0_.member_id as member_i3_0_, member0_.mod_dt as mod_dt4_0_, member0_.name as name5_0_, member0_.nick_name as nick_nam6_0_, member0_.password as password7_0_, member0_.reg_dt as reg_dt8_0_ from member member0_ where member0_.member_id=? [42104-214]
