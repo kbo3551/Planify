@@ -27,6 +27,11 @@ public class LoginService {
                 .orElse(false);
     }
 
+    public Member findByMemberId(String memberId) {
+        return memberRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + memberId));
+    }
+
     public void register(String memberId, String password, String nickName, String name, Gender gender) {
         if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("Password cannot be null or empty");

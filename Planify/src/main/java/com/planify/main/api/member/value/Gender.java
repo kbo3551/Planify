@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Gender {
+
     M("MALE"),
     W("FEMALE");
 
@@ -32,6 +33,7 @@ public enum Gender {
         }
         for (Gender gender : Gender.values()) {
             if (gender.name().equalsIgnoreCase(code.trim())) {
+
                 return gender;
             }
         }
