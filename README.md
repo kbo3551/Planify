@@ -30,9 +30,9 @@ com.planify.main
     <hr>
     <h2>설계 원칙</h2>
     <ul>
-        <li><strong>Domain-Driven Design (DDD):</strong> 도메인 중심의 설계를 기반으로 각 도메인을 명확히 분리하여 비즈니스 로직을 관리합니다.</li>
-        <li><strong>패키지 책임 분리:</strong> 각 레이어(application, domain, infrastructure, presentation)는 명확한 역할을 가지며 유지보수성과 확장성을 극대화합니다.</li>
-        <li><strong>경량 데이터베이스:</strong> H2 데이터베이스를 활용하여 간편한 테스트 환경을 제공합니다.</li>
+        <li><strong>Domain-Driven Design (DDD):</strong> 도메인 중심의 설계를 기반으로 각 도메인을 명확히 분리하여 비즈니스 로직을 관리</li>
+        <li><strong>패키지 책임 분리:</strong> 각 레이어(application, domain, infrastructure, presentation)는 명확한 역할을 가지며 유지보수성과 확장성을 극대화</li>
+        <li><strong>경량 데이터베이스:</strong> H2 데이터베이스를 활용하여 간편한 테스트 환경을 제공</li>
     </ul>
 
 <br>![image](https://github.com/user-attachments/assets/fd8ab86f-12b5-44ff-9ec7-84aeb1c6b946)
