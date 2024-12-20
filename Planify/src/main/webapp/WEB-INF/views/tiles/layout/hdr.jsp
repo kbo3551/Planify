@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- template -->
     <link href="/resources/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="/resources/template/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/resources/template/css/sb-admin-2.css" rel="stylesheet">
 	<!-- script_start -->
     <!-- template -->
     <script src="/resources/js/bundle/jquery-3.7.1.min.js"></script>
