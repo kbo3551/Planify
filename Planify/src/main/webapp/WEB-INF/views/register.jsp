@@ -1,29 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<body class="bg-gradient-primary">
 
-    <h2>회원가입</h2>
-    <form id="registerForm">
-        <label for="memberId">아이디:</label>
-        <input type="text" name="memberId" id="memberId" required /><br/><br/>
-    
-        <label for="password">비밀번호:</label>
-        <input type="password" name="password" id="password" required /><br/><br/>
-    
-        <label for="nickName">닉네임:</label>
-        <input type="text" name="nickName" id="nickName" required /><br/><br/>
-    
-        <label for="name">이름:</label>
-        <input type="text" name="name" id="name" required /><br/><br/>
-    
-        <label for="gender">성별:</label>
-        <select name="gender" id="gender" required>
-            <option value="M">남자</option>
-            <option value="W">여자</option>
-        </select><br/><br/>
-    
-        <button type="submit">회원가입</button>
-    </form>
-    <br/>
-    <a href="/login">로그인 페이지로 이동</a>
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
+                            </div>
+                            <form class="user" id="registerForm">
+<!--                                 <div class="form-group row"> -->
+<!--                                     <div class="col-sm-6 mb-3 mb-sm-0"> -->
+<!--                                         <input type="text" class="form-control form-control-user" id="exampleFirstName" -->
+<!--                                             placeholder="First Name"> -->
+<!--                                     </div> -->
+<!--                                     <div class="col-sm-6"> -->
+<!--                                         <input type="text" class="form-control form-control-user" id="exampleLastName" -->
+<!--                                             placeholder="Last Name"> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="memberId" placeholder="ID를 입력해주세요." required>
+                                </div>
+                                <div class="form-group">
+<!--                                 <div class="form-group row"> -->
+<!--                                     <div class="col-sm-6 mb-3 mb-sm-0"> -->
+                                        <input type="password" class="form-control form-control-user" id="password" placeholder="비밀번호를 입력해주세요" required>
+<!--                                     </div> -->
+                                </div>
+<!--                                     <div class="col-sm-6"> -->
+<!--                                         <input type="password" class="form-control form-control-user" -->
+<!--                                             id="exampleRepeatPassword" placeholder="확ㅇ비밀번호를 입력해주세요."> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="name" placeholder="이름을 입력해 주세요." required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="nickName" placeholder="닉네임을 입력해 주세요." required>
+                                </div>
+                                <div class="form-group">
+                                    <select name="gender" id="gender" class="custom-select form-control" required>
+							            <option value="M">남자</option>
+							            <option value="W">여자</option>
+							        </select>
+                                </div>
+                                <button class="btn btn-primary btn-user btn-block" type="submit">회원가입</button>
+<!--                                 <hr> -->
+<!--                                 <a href="index.html" class="btn btn-google btn-user btn-block"> -->
+<!--                                     <i class="fab fa-google fa-fw"></i> Register with Google -->
+<!--                                 </a> -->
+<!--                                 <a href="index.html" class="btn btn-facebook btn-user btn-block"> -->
+<!--                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook -->
+<!--                                 </a> -->
+                            </form>
+                            <hr>
+<!--                             <div class="text-center"> -->
+<!--                                 <a class="small" href="forgot-password.html">Forgot Password?</a> -->
+<!--                             </div> -->
+                            <div class="text-center">
+                                <a class="small" href="/login">로그인 페이지</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
 <script>
 $(document).ready(function() {
     $('#registerForm').submit(function(event) {
