@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-Main.jsp
-<br>
-H2접속 경로 : <a href="http://localhost:8080/h2-console">http://localhost:8080/h2-console</a>
-<br>
-${memberId}
-<br>
-<a href="/logout">로그아웃</a>
-<br>
-<div id='calendar' style="width: 50%;"></div>
+
+<div class="col-lg-12">
+
+<!-- Default Card Example -->
+    <div class="card mb-4">
+<!-- 		Main.jsp -->
+<!-- 		<br> -->
+<!-- 		H2접속 경로 : <a href="http://localhost:8080/h2-console">http://localhost:8080/h2-console</a> -->
+<!-- 		<br> -->
+<%-- 		${memberId} --%>
+<!-- 		<br> -->
+<!-- 		<a href="/logout">로그아웃</a> -->
+<!-- 		<br> -->
+		<div id='calendar' style="width: 100%;"></div>
+	</div>
+</div>
 
 <script src="/resources/js/bundle/fullcalendar-6.1.15/index.global.min.js"></script>
 <script type="text/javascript">
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		locale: 'ko', // 언어팩 한국어 지정
 		initialView: 'dayGridMonth',
+		contentHeight: 'auto', // 캘린더 높이 조절
 		headerToolbar: {
 		    left: 'prev,next today', // 이전, 다음, 오늘 버튼
 		    center: 'title',  // 달력 제목
