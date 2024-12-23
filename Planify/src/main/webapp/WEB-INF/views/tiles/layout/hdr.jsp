@@ -9,6 +9,7 @@
 	<!-- script_start -->
     <!-- template -->
     <script src="/resources/js/bundle/jquery-3.7.1.min.js"></script>
+    <script src="/resources/js/main/main.js"></script>
 	<script src="/resources/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- script_end -->
