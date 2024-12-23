@@ -7,8 +7,21 @@
     <title>Planify</title>
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name="left"/>
-	<tiles:insertAttribute name="body"/>
+    <div id="wrapper">
+		<tiles:insertAttribute name="left"/>
+		<!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+    			<tiles:insertAttribute name="header"/>
+    			
+                <div class="container-fluid">
+    				<tiles:insertAttribute name="body"/>
+                </div>
+		
+		    </div>
+		    <tiles:insertAttribute name="footer"/>
+		</div>
+    </div>
 </body>
 </html>
