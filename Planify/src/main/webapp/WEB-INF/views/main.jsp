@@ -5,15 +5,15 @@
 
 <!-- Default Card Example -->
     <div class="card mb-4">
-		Main.jsp
-		<br>
-		H2접속 경로 : <a href="http://localhost:8080/h2-console">http://localhost:8080/h2-console</a>
-		<br>
-		${memberId}
-		<br>
-		<a href="/logout">로그아웃</a>
-		<br>
-		<div id='calendar' style="width: 50%;"></div>
+<!-- 		Main.jsp -->
+<!-- 		<br> -->
+<!-- 		H2접속 경로 : <a href="http://localhost:8080/h2-console">http://localhost:8080/h2-console</a> -->
+<!-- 		<br> -->
+<%-- 		${memberId} --%>
+<!-- 		<br> -->
+<!-- 		<a href="/logout">로그아웃</a> -->
+<!-- 		<br> -->
+		<div id='calendar' style="width: 100%;"></div>
 	</div>
 </div>
 
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		locale: 'ko', // 언어팩 한국어 지정
 		initialView: 'dayGridMonth',
+		contentHeight: 'auto', // 캘린더 높이 조절
 		headerToolbar: {
 		    left: 'prev,next today', // 이전, 다음, 오늘 버튼
 		    center: 'title',  // 달력 제목
