@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS notice (
     mod_dt DATETIME,
     reg_no INTEGER,
     PRIMARY KEY (notice_id),
-    FOREIGN KEY (created_by) REFERENCES member (member_no) ON DELETE SET NULL
+    FOREIGN KEY (reg_no) REFERENCES member (member_no) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS admin_roles (
