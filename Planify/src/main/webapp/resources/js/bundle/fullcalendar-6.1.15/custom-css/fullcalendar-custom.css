@@ -1,0 +1,9 @@
+@charset "utf-8";
+@media (max-width: 768px) {
+    .fc-toolbar {
+        flex-direction: column; /* 세로로 배치 */
+    }
+}
+.fc-toolbar {
+       padding: 10px; /* 원하는 패딩 값으로 조정 */
+}

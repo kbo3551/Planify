@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link href="/resources/js/bundle/fullcalendar-6.1.15/custom-css/fullcalendar-custom.css" rel="stylesheet" type="text/css">
 <div class="col-lg-12">
     <div class="card mb-4">
 		<div id='calendar' style="width: 100%;"></div>
