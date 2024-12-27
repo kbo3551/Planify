@@ -52,33 +52,5 @@
             </div>
         </div>
     </div>
-<script>
-$(document).ready(function() {
-    $('#loginForm').submit(function(event) {
-        event.preventDefault();
-
-        const memberId = $('#memberId').val();
-        const password = $('#password').val();
-
-        $.ajax({
-            url: '/api/login',
-            type: 'POST',
-            contentType: 'application/json; charset=UTF-8',
-            xhrFields: {
-                withCredentials: true // 세션 유지
-            },
-            data: JSON.stringify({ memberId: memberId, password: password }),
-            success: function(response) {
-                alert(response.message);
-                window.location.href = response.redirectUrl;
-            },
-            error: function(xhr) {
-                const errorMessage = xhr.responseJSON ? xhr.responseJSON.error : '알 수 없는 오류';
-                alert('로그인 실패: ' + errorMessage);
-            }
-        });
-    });
-});
-</script>
+<script src="/resources/js/login/login.js"></script>
 </body>
-

@@ -19,7 +19,7 @@ public class TodoService {
     private final TodoRepository todoRepository;
 
     public List<Todo> getAllTodosByMember(Long memberNo) {
-        return todoRepository.findAllByMemberNo(memberNo);
+        return todoRepository.findAllByMember_MemberNo(memberNo);
     }
 
     public Todo createTodo(Todo todo) {

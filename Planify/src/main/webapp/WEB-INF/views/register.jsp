@@ -25,12 +25,12 @@
 <!--                                     </div> -->
 <!--                                 </div> -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="memberId" placeholder="ID를 입력해주세요." required>
+                                    <input type="text" class="form-control form-control-user" id="memberId" name="memberId" placeholder="ID를 입력해주세요." required>
                                 </div>
                                 <div class="form-group">
 <!--                                 <div class="form-group row"> -->
 <!--                                     <div class="col-sm-6 mb-3 mb-sm-0"> -->
-                                        <input type="password" class="form-control form-control-user" id="password" placeholder="비밀번호를 입력해주세요" required>
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호를 입력해주세요" required>
 <!--                                     </div> -->
                                 </div>
 <!--                                     <div class="col-sm-6"> -->
@@ -39,10 +39,10 @@
 <!--                                     </div> -->
 <!--                                 </div> -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="name" placeholder="이름을 입력해 주세요." required>
+                                    <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="이름을 입력해 주세요." required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="nickName" placeholder="닉네임을 입력해 주세요." required>
+                                    <input type="text" class="form-control form-control-user" id="nickName" name="nickName" placeholder="닉네임을 입력해 주세요." required>
                                 </div>
                                 <div class="form-group">
                                     <select name="gender" id="gender" class="custom-select form-control" required>
@@ -73,34 +73,5 @@
         </div>
 
     </div>
+<script src="/resources/js/register/register.js"></script>
 </body>
-<script>
-$(document).ready(function() {
-    $('#registerForm').submit(function(event) {
-        event.preventDefault();
-
-        const data = {
-            memberId: $('#memberId').val(),
-            password: $('#password').val(),
-            nickName: $('#nickName').val(),
-            name: $('#name').val(),
-            gender: $('#gender').val() // 'M' 또는 'W'
-        };
-
-        $.ajax({
-            url: '/api/login/register',
-            type: 'POST',
-            contentType: 'application/json', // JSON 형식으로 전송
-            data: JSON.stringify(data),
-            success: function(response) {
-                alert(response.message); // 성공 메시지 출력
-                window.location.href = '/login';
-            },
-            error: function(xhr) {
-                alert('회원가입 실패: ' + xhr.responseJSON.error); // 에러 메시지 출력
-            }
-        });
-    });
-
-});
-</script>
