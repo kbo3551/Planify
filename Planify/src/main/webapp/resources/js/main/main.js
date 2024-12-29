@@ -101,11 +101,42 @@ window.plan.util = (function() {
             return false;
         }
     }
-  
+    
+    /**
+     * form을 Object로 담아 주는 함수(serialize)
+     * @param {String} formTargetId ex) form tag Id
+     * @returns {Object} object
+     */
+    function fetchFormData(formTargetId) {
+        var formData = new Object();
+        var targetForm = $("#" + formTargetId);
+        var inputs = targetForm.find('input, select, textarea');
+
+        inputs.each(function() {
+            var input = $(this);
+            if (input.is('input')) {
+                if (input.attr('type') === 'checkbox') {
+                    formData[input.attr('name')] = input.prop('checked');
+                } else if (input.attr('type') === 'radio') {
+                    if (input.prop('checked')) {
+                        formData[input.attr('name')] = input.val();
+                    }
+                } else {
+                    formData[input.attr('name')] = input.val();
+                }
+            } else {
+                formData[input.attr('name')] = input.val();
+            }
+        });
+
+        return formData;
+    }
+    
     return {
         isEmpty: isEmpty,
         AJAX_Request: AJAX_Request,
         AJAX_Form: AJAX_Form,
-        AJAX_Json: AJAX_Json
+        AJAX_Json: AJAX_Json,
+        fetchFormData : fetchFormData
     };
 })();

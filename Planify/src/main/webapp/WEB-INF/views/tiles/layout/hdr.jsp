@@ -9,14 +9,15 @@
 	<!-- script_start -->
     <!-- template -->
     <script src="/resources/js/bundle/jquery-3.7.1.min.js"></script>
-    <script src="/resources/js/main/main.js"></script>
 	<script src="/resources/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="/resources/template/vendor/jquery-easing/jquery.easing.min.js"></script>
-
     <!-- Custom scripts for all pages-->
-    <script src="/resources/template/js/sb-admin-2.min.js"></script>
+    <!-- 템플릿 스크립트 tiles 적용 이후 DOM형성 전에 로드되어 defer 추가 -->
+    <script src="/resources/template/js/sb-admin-2.min.js" defer></script>
+
+    <!-- main 스크립트 -->
+    <script src="/resources/js/main/main.js"></script>
 
 <!--     <script src="/resources/template/vendor/chart.js/Chart.min.js"></script> -->
 

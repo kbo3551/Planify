@@ -19,6 +19,7 @@ public class MainController {
 	public String main(Model model) {
 		Member authenticatedUser = AuthenticatedUserUtil.getAuthenticatedUser();
         if (authenticatedUser != null) {
+        	model.addAttribute("memberNo", authenticatedUser.getMemberNo());
             model.addAttribute("memberId", authenticatedUser.getMemberId());
             model.addAttribute("nickName", authenticatedUser.getNickName());
             model.addAttribute("name", authenticatedUser.getName());

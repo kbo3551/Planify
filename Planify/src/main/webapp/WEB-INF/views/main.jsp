@@ -1,18 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link href="/resources/js/bundle/fullcalendar-6.1.15/custom-css/fullcalendar-custom.css" rel="stylesheet" type="text/css">
 <div class="col-lg-12">
-
-<!-- Default Card Example -->
     <div class="card mb-4">
-<!-- 		Main.jsp -->
-<!-- 		<br> -->
-<!-- 		H2접속 경로 : <a href="http://localhost:8080/h2-console">http://localhost:8080/h2-console</a> -->
-<!-- 		<br> -->
-<%-- 		${memberId} --%>
-<!-- 		<br> -->
-<!-- 		<a href="/logout">로그아웃</a> -->
-<!-- 		<br> -->
 		<div id='calendar' style="width: 100%;"></div>
 	</div>
 </div>

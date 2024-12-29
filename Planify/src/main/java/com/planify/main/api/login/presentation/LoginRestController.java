@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +17,7 @@ import com.planify.main.api.login.application.LoginService;
 import com.planify.main.api.login.application.dto.AddMemberDTO;
 import com.planify.main.api.login.domain.Login;
 import com.planify.main.api.member.domain.Member;
+import com.planify.main.common.ApiResult;
 import com.planify.main.config.security.CustomUserDetails;
 
 @RestController
@@ -31,7 +31,7 @@ public class LoginRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AddMemberDTO addMemberDTO) {
+    public ApiResult<?> register(@RequestBody AddMemberDTO addMemberDTO) {
         try {
             loginService.register(
                     addMemberDTO.getMemberId(),
@@ -40,14 +40,14 @@ public class LoginRestController {
                     addMemberDTO.getName(),
                     addMemberDTO.getGender()
             );
-            return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
+            return ApiResult.success("회원가입 성공", null);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
+            return ApiResult.failure(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody Login login, HttpSession session) {
+    public ApiResult<?> login(@RequestBody Login login, HttpSession session) {
         try {
             boolean isAuthenticated = loginService.authenticate(login.getMemberId(), login.getPassword());
 
@@ -62,14 +62,12 @@ public class LoginRestController {
                 SecurityContextHolder.getContext().setAuthentication(auth);
                 session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
-                return ResponseEntity.ok(Map.of("message", "로그인 성공", "redirectUrl", "/main"));
+                return ApiResult.success("로그인 성공", Map.of("redirectUrl", "/main"));
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("error", "아이디 또는 비밀번호가 잘못되었습니다."));
+                return ApiResult.failure(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 잘못되었습니다.");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", e.getMessage()));
+            return ApiResult.failure(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
 }
