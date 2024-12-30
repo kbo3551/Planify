@@ -21,7 +21,6 @@ import com.planify.main.api.todo.value.TodoStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -46,7 +45,8 @@ public class Todo {
     @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'PENDING'")
     private TodoStatus status;
 
-    private LocalDateTime dueDate;
+    private LocalDateTime startDate;  // 시작 날짜
+    private LocalDateTime endDate;    // 종료 날짜
 
     @Column(updatable = false)
     private LocalDateTime regDt = LocalDateTime.now();
@@ -59,11 +59,22 @@ public class Todo {
     }
 
     @Builder
-    public Todo(Member member, String title, String description, TodoStatus status, LocalDateTime dueDate) {
+    public Todo(Member member, String title, String description, TodoStatus status, LocalDateTime startDate, LocalDateTime endDate) {
         this.member = member;
         this.title = title;
         this.description = description;
         this.status = status;
-        this.dueDate = dueDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+    
+    public void update(Member member, String title, String description, TodoStatus status, LocalDateTime startDate, LocalDateTime endDate) {
+        this.member = member;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.modDt = LocalDateTime.now();
     }
 }

@@ -1,6 +1,7 @@
 package com.planify.main.api.todo.presentation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.planify.main.api.todo.application.TodoService;
-import com.planify.main.api.todo.domain.Todo;
+import com.planify.main.api.todo.application.dto.TodoDTO;
 import com.planify.main.common.ApiResult;
 
 import lombok.RequiredArgsConstructor;
@@ -22,31 +23,41 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class TodoRestController {
-	
-	private final TodoService todoService;
 
+    private final TodoService todoService;
+
+    // 회원별 Todo 목록 조회 (DTO로 변환하여 반환)
     @GetMapping("/todos/member/{memberNo}")
-    public ApiResult<List<Todo>> getTodosByMember(@PathVariable Long memberNo) {
-        return ApiResult.success(todoService.getAllTodosByMember(memberNo));
+    public ApiResult<List<TodoDTO>> getTodosByMember(@PathVariable Long memberNo) {
+        List<TodoDTO> todos = todoService.getAllTodosByMember(memberNo).stream()
+                                         .map(TodoDTO::ofEntity)
+                                         .collect(Collectors.toList());
+        return ApiResult.success(todos);
     }
 
-    @PostMapping
-    public ApiResult<Todo> createTodo(@RequestBody Todo todo) {
-        return ApiResult.success(todoService.createTodo(todo));
+    // Todo 생성
+    @PostMapping("/todo")
+    public ApiResult<TodoDTO> createTodo(@RequestBody TodoDTO todoDTO) {
+        TodoDTO createdTodo = todoService.createTodo(todoDTO);
+        return ApiResult.success(createdTodo);
     }
 
+    // Todo 수정
+    @PutMapping("/todos/{todoId}")
+    public ApiResult<TodoDTO> updateTodo(@PathVariable Long todoId, @RequestBody TodoDTO updatedTodoDTO) {
+        TodoDTO updatedTodo = todoService.updateTodo(todoId, updatedTodoDTO);
+        return ApiResult.success(updatedTodo);
+    }
+
+    // Todo 조회
     @GetMapping("/todos/{todoId}")
-    public ApiResult<Todo> getTodoById(@PathVariable Long todoId) {
+    public ApiResult<TodoDTO> getTodoById(@PathVariable Long todoId) {
         return todoService.getTodoById(todoId)
-                .map(todo -> ApiResult.success(todo))
+                .map(todo -> ApiResult.success(TodoDTO.ofEntity(todo)))
                 .orElse(ApiResult.failure(HttpStatus.NOT_FOUND, "Todo not found"));
     }
 
-    @PutMapping("/todos/{todoId}")
-    public ApiResult<Todo> updateTodo(@PathVariable Long todoId, @RequestBody Todo updatedTodo) {
-        return ApiResult.success(todoService.updateTodo(todoId, updatedTodo));
-    }
-
+    // Todo 삭제
     @DeleteMapping("/todos/{todoId}")
     public ApiResult<Void> deleteTodoById(@PathVariable Long todoId) {
         todoService.deleteTodoById(todoId);
