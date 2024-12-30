@@ -1,46 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="/resources/js/bundle/fullcalendar-6.1.15/custom-css/fullcalendar-custom.css" rel="stylesheet" type="text/css">
+
 <div class="col-lg-12">
     <div class="card mb-4">
 		<div id='calendar' style="width: 100%;"></div>
 	</div>
 </div>
+<!-- Modal for adding/updating events -->
+<div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="todoModalLabel">일정 추가/수정</h5>
+                <button type="button" class="close" id="modal-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <form id="todoForm">
+                    <input type="hidden" id="todoId" name="todoId">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">일정 제목</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="todoStart" class="form-label">시작 날짜</label>
+                        <input type="datetime-local" class="form-control" id="todoStart" name="todoStart" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="todoEnd" class="form-label">종료 날짜</label>
+                        <input type="datetime-local" class="form-control" id="todoEnd" name="todoEnd">
+                    </div>
+                    <div class="mb-3">
+                        <label for="todoEnd" class="form-label">일정 내용</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                    
+                    <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display: block" id="userInfo" data-number="${memberNo}"></div>
 
 <script src="/resources/js/bundle/fullcalendar-6.1.15/index.global.min.js"></script>
-<script type="text/javascript">
-/** 
- * 테스트 fullcalendar
- * TODO : 작업 시 동적 데이터 통신 및 다듬기 
- */
-document.addEventListener('DOMContentLoaded', function () {
-	var calendarEl = document.getElementById('calendar');
-	
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		locale: 'ko', // 언어팩 한국어 지정
-		initialView: 'dayGridMonth',
-		contentHeight: 'auto', // 캘린더 높이 조절
-		headerToolbar: {
-		    left: 'prev,next today', // 이전, 다음, 오늘 버튼
-		    center: 'title',  // 달력 제목
-		    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth' // 월, 주, 일, 일정목록 지정
-		},
-		views: {
-		    dayGridMonth: { buttonText: '월' },
-		    timeGridWeek: { buttonText: '주' },
-		    timeGridDay: { buttonText: '일' }, 
-		    listMonth: { buttonText: '일정목록' }  
-		},
-		events: [
-		    { title: '회의', start: '2024-12-20' },
-		    { title: '김장', start: '2024-12-22', end: '2024-12-23' },
-		    { title: '크리스마스 파티', start: '2024-12-23', end: '2024-12-26' }
-		]
-	});
-	
-	calendar.render();
-});
-</script>
-
-</body>
-</html>
+<script src="/resources/js/main/main.js"></script>
+<script type="text/javascript"></script>
