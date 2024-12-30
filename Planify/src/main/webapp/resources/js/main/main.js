@@ -1,142 +1,118 @@
 /**
- * main.js
+ * 테스트 fullcalendar
+ * TODO : 작업 시 동적 데이터 통신 및 다듬기
  */
 $(document).ready(function() {
-    // plan.util.init();
-});
+    var calendarEl = document.getElementById('calendar');
 
-if (typeof window.plan === 'undefined') {
-    window.plan = new Object();
-}
-
-window.plan.util = (function() {
-    /**
-     * AJAX 호출 공통 함수
-     * @param {String} url - 통신할 URL
-     * @param {Object|FormData} data - 전달할 파라미터
-     * @param {String} method - 통신할 HTTP 메서드 (기본값: 'POST')
-     * @param {String} responseType - 응답 데이터 타입 (기본값: 'json')
-     * @param {Function} callback - 콜백 함수 (선택)
-     * @param {boolean} async - 비동기 여부 (기본값: true)
-     * @param {boolean} isForm - FormData 사용 여부 (기본값: false)
-     * @returns {Promise} - AJAX 호출 결과 Promise
-     */
-    function AJAX_Request({ url, data = {}, method = 'POST', responseType = 'json', callback, async = true, isForm = false }) {
-        var dfd = $.Deferred();
-    
-        if (!url) {
-            console.error('요청 URL 확인해주세요.');
-            return dfd.reject('요청 URL 확인해주세요.').promise();
-        }
-    
-        var ajaxOptions = {
-            type: method,
-            url: url,
-            dataType: responseType,
-            async: async,
-            success: function(response) {
-                console.log("url :", url);
-                if (typeof callback === 'function') {
-                    callback(response);
-                }
-                dfd.resolve(response);
-            },
-            error: function(jqXHR) {
-                console.error('Error:', url, jqXHR);
-                alert(jqXHR.responseText || 'error');
-                dfd.reject(jqXHR);
-            }
-        };
-    
-        if (isForm) {
-            ajaxOptions.data = data instanceof FormData ? data : new FormData($(data)[0]);
-            ajaxOptions.processData = false;
-            ajaxOptions.contentType = false;
-        } else {
-            ajaxOptions.data = JSON.stringify(data);
-            ajaxOptions.contentType = 'application/json; charset=utf-8';
-        }
-    
-        $.ajax(ajaxOptions);
-        return dfd.promise();
-    }
-    
-    /**
-     * FormData 기반 AJAX 호출 함수
-     * @param {String} url - 통신할 URL
-     * @param {Form} formParams - 전달할 Form 객체
-     * @param {String} method - 통신할 HTTP 메서드
-     * @param {String} responseType - 응답 데이터 타입
-     * @param {Function} callback - 콜백 함수 (선택)
-     * @param {boolean} async - 비동기 여부
-     * @returns {Promise} - AJAX 호출 결과 Promise
-     */
-    function AJAX_Form(url, formParams, method, responseType, callback, async) {
-        return AJAX_Request({ url, data: formParams, method, responseType, callback, async, isForm: true });
-    }
-    
-    /**
-     * JSON 객체 기반 AJAX 호출 함수
-     * @param {String} url - 통신할 URL
-     * @param {Object} params - 전달할 JSON 객체
-     * @param {String} method - 통신할 HTTP 메서드
-     * @param {String} responseType - 응답 데이터 타입
-     * @param {Function} callback - 콜백 함수 (선택)
-     * @param {boolean} async - 비동기 여부
-     * @returns {Promise} - AJAX 호출 결과 Promise
-     */
-    function AJAX_Json(url, params, method, responseType, callback, async) {
-        return AJAX_Request({ url, data: params, method, responseType, callback, async });
-    }
-    
-    /**
-     * 전달 받은 인자 빈값 체크
-     * @param {Object} params
-     * @returns boolean ex) 비어있을 경우 true, 존재할 경우 false
-     */
-    function isEmpty(params) {
-        if (params == '' || params == null || params == undefined || params == 'null' || (params != null && typeof params == 'object' && !Object.keys(params).length)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * form을 Object로 담아 주는 함수(serialize)
-     * @param {String} formTargetId ex) form tag Id
-     * @returns {Object} object
-     */
-    function fetchFormData(formTargetId) {
-        var formData = new Object();
-        var targetForm = $("#" + formTargetId);
-        var inputs = targetForm.find('input, select, textarea');
-
-        inputs.each(function() {
-            var input = $(this);
-            if (input.is('input')) {
-                if (input.attr('type') === 'checkbox') {
-                    formData[input.attr('name')] = input.prop('checked');
-                } else if (input.attr('type') === 'radio') {
-                    if (input.prop('checked')) {
-                        formData[input.attr('name')] = input.val();
-                    }
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'ko', // 언어팩 한국어 지정
+        initialView: 'dayGridMonth',
+        contentHeight: 'auto', // 캘린더 높이 조절
+        headerToolbar: {
+            left: 'prev,next today', // 이전, 다음, 오늘 버튼
+            center: 'title',  // 달력 제목
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth' // 월, 주, 일, 일정목록 지정
+        },
+        views: {
+            dayGridMonth: { buttonText: '월' },
+            timeGridWeek: { buttonText: '주' },
+            timeGridDay: { buttonText: '일' },
+            listMonth: { buttonText: '일정목록' }
+        },
+        events: function (info, successCallback, failureCallback) {
+            const memberNo= $('#userInfo').data('number');
+            plan.util.AJAX_Json(`/api/todos/member/`+ memberNo, '', 'GET', 'json').done(function (response) {
+                if (response.status === 200) {
+                    const events = response.data.map(todo => ({
+                        id: todo.todoId,
+                        title: todo.title,
+                        start: todo.startDate,
+                        end: todo.endDate,
+                        etc : todo.description
+                    }));
+                    successCallback(events);
                 } else {
-                    formData[input.attr('name')] = input.val();
+                    alert('일정 데이터를 불러오는데 실패했습니다.');
                 }
-            } else {
-                formData[input.attr('name')] = input.val();
-            }
-        });
+            }).fail(function () {
+                alert('일정 데이터를 불러오는데 실패했습니다.');
+            });
+        },
+        eventClick: function (info) {
+            const event = info.event;
+            $('#todoId').val(event.id);
+            $('#title').val(event.title);
+            $('#todoStart').val(event.startStr.slice(0, 16));
+            $('#todoEnd').val(event.endStr.slice(0, 16));
+            $('#description').val(event.extendedProps.etc);
+            $('#todoModal').modal('show');
+        },
+        dateClick: function (info) {
+            // 선택한 날짜
+            let selectedDate = new Date(info.date);
+            // 선택한 날짜 디폴트 12:00 AM 
+            let startDate = new Date(selectedDate.setHours(0, 0, 0, 0));
+            // +1일 12:00 AM
+            let nextDate = new Date(info.date);
+            let endDate = new Date(nextDate.setDate(nextDate.getDate() + 1));
+            endDate.setHours(0, 0, 0, 0);
+            // ISO 변환
+            const startDates = startDate.toISOString().slice(0, 16);
+            const endDates = endDate.toISOString().slice(0, 16);
 
-        return formData;
-    }
-    
-    return {
-        isEmpty: isEmpty,
-        AJAX_Request: AJAX_Request,
-        AJAX_Form: AJAX_Form,
-        AJAX_Json: AJAX_Json,
-        fetchFormData : fetchFormData
-    };
-})();
+            $('#todoId').val('');
+            $('#title').val('');
+            // $('#todoStart').val(plan.util.getToDateTimeISO(0));
+            // $('#todoEnd').val(plan.util.getToDateTimeISO(1));
+            $('#todoStart').val(startDates);
+            $('#todoEnd').val(endDates);
+            $('#description').val('');
+            $('#todoModal').modal('show');
+        }
+    });
+
+    $('#todoSaveBtn').on('click', function (e) {
+        e.preventDefault();
+        const id = $('#todoId').val();
+        const todo = plan.util.fetchFormData('todoForm');
+
+        todo.memberNo = $('#userInfo').data('number');
+
+        todo.startDate = new Date($('#todoStart').val()).toISOString();
+        todo.endDate = new Date($('#todoEnd').val()).toISOString();
+
+        if (id) {
+            // 수정
+            plan.util.AJAX_Json(`/api/todos/${id}`, todo, 'PUT', 'json').done(function (response) {
+                if (response.status === 200) {
+                    calendar.refetchEvents();
+                    $('#todoModal').modal('hide');
+                } else {
+                    alert('일정 수정에 실패했습니다.');
+                }
+            }).fail(function () {
+                alert('error');
+            });
+        } else {
+            // 생성
+            plan.util.AJAX_Json('/api/todo', todo, 'POST', 'json').done(function (response) {
+                if (response.status === 200) {
+                    calendar.refetchEvents();
+                    $('#todoModal').modal('hide');
+                } else {
+                    alert('일정 추가에 실패했습니다.');
+                }
+            }).fail(function () {
+                alert('error');
+            });
+        }
+    });
+
+    $('#modal-close').on('click', function (){
+        plan.util.resetForm('todoForm');
+        $('#todoModal').modal('hide');
+    });
+
+    calendar.render();
+});

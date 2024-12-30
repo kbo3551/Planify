@@ -16,8 +16,8 @@
     <!-- 템플릿 스크립트 tiles 적용 이후 DOM형성 전에 로드되어 defer 추가 -->
     <script src="/resources/template/js/sb-admin-2.min.js" defer></script>
 
-    <!-- main 스크립트 -->
-    <script src="/resources/js/main/main.js"></script>
+    <!-- common 스크립트 -->
+    <script src="/resources/js/common/common.js"></script>
 
 <!--     <script src="/resources/template/vendor/chart.js/Chart.min.js"></script> -->
 
