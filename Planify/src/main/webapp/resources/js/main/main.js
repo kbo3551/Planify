@@ -4,6 +4,8 @@
  * 
  */
 $(document).ready(function() {
+    const Toast = plan.util.getToast();
+    
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,10 +37,18 @@ $(document).ready(function() {
                     }));
                     successCallback(events);
                 } else {
-                    alert('일정 데이터를 불러오는데 실패했습니다.');
+                    Swal.fire({
+                      title: "오류",
+                      text: '일정 데이터를 불러오는데 실패했습니다.',
+                      icon: "error"
+                    });
                 }
             }).fail(function () {
-                alert('일정 데이터를 불러오는데 실패했습니다.');
+                Swal.fire({
+                  title: "오류",
+                  text: '일정 데이터를 불러오는데 실패했습니다.',
+                  icon: "error"
+                });
             });
         },
         eventClick: function (info) {
@@ -91,25 +101,54 @@ $(document).ready(function() {
             plan.util.AJAX_Json(`/api/todos/${id}`, todo, 'PUT', 'json').done(function (response) {
                 if (response.status === 200) {
                     calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.message,
+                    }).then(() => {
+                        $('#todoModal').modal('hide');
+                    });
                 } else {
-                    alert('일정 수정에 실패했습니다.');
+                    Swal.fire({
+                        title: "오류",
+                        text: '일정 수정에 실패했습니다.',
+                        icon: "error"
+                    });
                 }
-            }).fail(function () {
-                alert('error');
+            }).fail(function(jqXHR) {
+                const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                Swal.fire({
+                    title: "오류",
+                    text: errorMessage,
+                    icon: "error"
+                });
             });
         } else {
             // 생성
             plan.util.AJAX_Json('/api/todo', todo, 'POST', 'json').done(function (response) {
                 if (response.status === 200) {
                     calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.message,
+                    }).then(() => {
+                        $('#todoModal').modal('hide');
+                    });
                 } else {
-                    alert('일정 추가에 실패했습니다.');
+                    Swal.fire({
+                        title: "오류",
+                        text: '일정 추가에 실패했습니다.',
+                        icon: "error"
+                    });
                 }
-            }).fail(function () {
-                alert('error');
+            }).fail(function(jqXHR) {
+                const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                Swal.fire({
+                  title: "오류",
+                  text: errorMessage,
+                  icon: "error"
+                });
             });
+            
         }
     });
 
@@ -119,20 +158,44 @@ $(document).ready(function() {
     });
 
     $('#todoRemoveBtn').on('click', function(){
-        var flag = confirm('일정을 삭제 하시겠습니까?');
-        if(flag){
-            const id = $('#todoId').val();
-            plan.util.AJAX_Json(`/api/todos/${id}`, '', 'DELETE', 'json').done(function (response) {
-                if (response.status === 200) {
-                    calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
-                } else {
-                    alert('일정 삭제에 실패했습니다.');
-                }
-            }).fail(function () {
-                alert('error');
-            }); 
-        }
+        
+        Swal.fire({
+            title: "삭제",
+            text: "일정을 삭제 하시겠습니까?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "확인"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const id = $('#todoId').val();
+                plan.util.AJAX_Json(`/api/todos/${id}`, '', 'DELETE', 'json').done(function (response) {
+                    if (response.status === 200) {
+                        calendar.refetchEvents();
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        }).then(() => {
+                            $('#todoModal').modal('hide');
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "오류",
+                            text: '일정 삭제에 실패했습니다.',
+                            icon: "error"
+                        });
+                    }
+                }).fail(function(jqXHR) {
+                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                    Swal.fire({
+                        title: "오류",
+                        text: errorMessage,
+                        icon: "error"
+                    });
+                });
+            }
+        });
     });
     
     calendar.render();
