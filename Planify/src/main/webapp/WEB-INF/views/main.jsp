@@ -32,17 +32,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="todoEnd" class="form-label">일정 내용</label>
-                        <input type="text" class="form-control" id="description" name="description">
+<!--                         <input type="text" class="form-control" id="description" name="description"> -->
+                        <textarea class="form-control" id="description" name="description" rows="3" cols="3" style="resize: none;"></textarea>
                     </div>
                     
                     <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
+                    <button type="button" id="todoRemoveBtn" class="btn btn-danger" style="display: none;">삭제</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div style="display: block" id="userInfo" data-number="${memberNo}"></div>
+<div style="display: block" id="userInfo" data-number="<c:out escapeXml="true" value="${memberNo}" />"></div>
 
 <script src="/resources/js/bundle/fullcalendar-6.1.15/index.global.min.js"></script>
 <script src="/resources/js/main/main.js"></script>
