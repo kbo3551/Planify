@@ -1,6 +1,7 @@
 /**
  * 테스트 fullcalendar
  * TODO : 작업 시 동적 데이터 통신 및 다듬기
+ * 
  */
 $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
@@ -20,6 +21,7 @@ $(document).ready(function() {
             timeGridDay: { buttonText: '일' },
             listMonth: { buttonText: '일정목록' }
         },
+        // TODO : 이벤트 다듬기 (유효성,잘못된 수정, 잘못된 이벤트 등)
         events: function (info, successCallback, failureCallback) {
             const memberNo= $('#userInfo').data('number');
             plan.util.AJAX_Json(`/api/todos/member/`+ memberNo, '', 'GET', 'json').done(function (response) {
@@ -47,6 +49,7 @@ $(document).ready(function() {
             $('#todoEnd').val(event.endStr.slice(0, 16));
             $('#description').val(event.extendedProps.etc);
             $('#todoModal').modal('show');
+            $('#todoRemoveBtn').show();
         },
         dateClick: function (info) {
             // 선택한 날짜
@@ -69,6 +72,7 @@ $(document).ready(function() {
             $('#todoEnd').val(endDates);
             $('#description').val('');
             $('#todoModal').modal('show');
+            $('#todoRemoveBtn').hide();
         }
     });
 
@@ -114,5 +118,22 @@ $(document).ready(function() {
         $('#todoModal').modal('hide');
     });
 
+    $('#todoRemoveBtn').on('click', function(){
+        var flag = confirm('일정을 삭제 하시겠습니까?');
+        if(flag){
+            const id = $('#todoId').val();
+            plan.util.AJAX_Json(`/api/todos/${id}`, '', 'DELETE', 'json').done(function (response) {
+                if (response.status === 200) {
+                    calendar.refetchEvents();
+                    $('#todoModal').modal('hide');
+                } else {
+                    alert('일정 삭제에 실패했습니다.');
+                }
+            }).fail(function () {
+                alert('error');
+            }); 
+        }
+    });
+    
     calendar.render();
 });
