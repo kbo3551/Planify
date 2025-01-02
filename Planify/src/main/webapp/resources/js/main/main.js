@@ -3,7 +3,9 @@
  * TODO : 작업 시 동적 데이터 통신 및 다듬기
  * 
  */
+const Toast = plan.util.getToast();
 $(document).ready(function() {
+    
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -21,7 +23,6 @@ $(document).ready(function() {
             timeGridDay: { buttonText: '일' },
             listMonth: { buttonText: '일정목록' }
         },
-        // TODO : 이벤트 다듬기 (유효성,잘못된 수정, 잘못된 이벤트 등)
         events: function (info, successCallback, failureCallback) {
             const memberNo= $('#userInfo').data('number');
             plan.util.AJAX_Json(`/api/todos/member/`+ memberNo, '', 'GET', 'json').done(function (response) {
@@ -35,10 +36,18 @@ $(document).ready(function() {
                     }));
                     successCallback(events);
                 } else {
-                    alert('일정 데이터를 불러오는데 실패했습니다.');
+                    Swal.fire({
+                      title: "오류",
+                      text: '일정 데이터를 불러오는데 실패했습니다.',
+                      icon: "error"
+                    });
                 }
             }).fail(function () {
-                alert('일정 데이터를 불러오는데 실패했습니다.');
+                Swal.fire({
+                  title: "오류",
+                  text: '일정 데이터를 불러오는데 실패했습니다.',
+                  icon: "error"
+                });
             });
         },
         eventClick: function (info) {
@@ -78,38 +87,79 @@ $(document).ready(function() {
 
     $('#todoSaveBtn').on('click', function (e) {
         e.preventDefault();
-        const id = $('#todoId').val();
-        const todo = plan.util.fetchFormData('todoForm');
 
-        todo.memberNo = $('#userInfo').data('number');
+        var params = plan.util.fetchFormData('todoForm');
+        const validation = isValidation(params);
+        // const startDay = new Date($('#todoStart').val());
+        // const endDay = new Date($('#todoEnd').val());
 
-        todo.startDate = new Date($('#todoStart').val()).toISOString();
-        todo.endDate = new Date($('#todoEnd').val()).toISOString();
+        if(validation) {
 
-        if (id) {
-            // 수정
-            plan.util.AJAX_Json(`/api/todos/${id}`, todo, 'PUT', 'json').done(function (response) {
-                if (response.status === 200) {
-                    calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
-                } else {
-                    alert('일정 수정에 실패했습니다.');
-                }
-            }).fail(function () {
-                alert('error');
-            });
-        } else {
-            // 생성
-            plan.util.AJAX_Json('/api/todo', todo, 'POST', 'json').done(function (response) {
-                if (response.status === 200) {
-                    calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
-                } else {
-                    alert('일정 추가에 실패했습니다.');
-                }
-            }).fail(function () {
-                alert('error');
-            });
+            const id = $('#todoId').val();
+            const todo = plan.util.fetchFormData('todoForm');
+
+            todo.memberNo = $('#userInfo').data('number');
+
+            // todo.startDate = new Date($('#todoStart').val()).toISOString();
+            // todo.endDate = new Date($('#todoEnd').val()).toISOString();
+            // 저장할땐 기본 input에서 받아온 값으로 해야 오차범위 x
+            todo.startDate = $('#todoStart').val();
+            todo.endDate = $('#todoEnd').val();
+
+            if (id) {
+                // 수정
+                plan.util.AJAX_Json(`/api/todos/${id}`, todo, 'PUT', 'json').done(function (response) {
+                    if (response.status === 200) {
+                        calendar.refetchEvents();
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        }).then(() => {
+                            $('#todoModal').modal('hide');
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "오류",
+                            text: '일정 수정에 실패했습니다.',
+                            icon: "error"
+                        });
+                    }
+                }).fail(function(jqXHR) {
+                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                    Swal.fire({
+                        title: "오류",
+                        text: errorMessage,
+                        icon: "error"
+                    });
+                });
+            } else {
+                // 생성
+                plan.util.AJAX_Json('/api/todo', todo, 'POST', 'json').done(function (response) {
+                    if (response.status === 200) {
+                        calendar.refetchEvents();
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        }).then(() => {
+                            $('#todoModal').modal('hide');
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "오류",
+                            text: '일정 추가에 실패했습니다.',
+                            icon: "error"
+                        });
+                    }
+                }).fail(function(jqXHR) {
+                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                    Swal.fire({
+                        title: "오류",
+                        text: errorMessage,
+                        icon: "error"
+                    });
+                });
+
+            }
         }
     });
 
@@ -119,21 +169,72 @@ $(document).ready(function() {
     });
 
     $('#todoRemoveBtn').on('click', function(){
-        var flag = confirm('일정을 삭제 하시겠습니까?');
-        if(flag){
-            const id = $('#todoId').val();
-            plan.util.AJAX_Json(`/api/todos/${id}`, '', 'DELETE', 'json').done(function (response) {
-                if (response.status === 200) {
-                    calendar.refetchEvents();
-                    $('#todoModal').modal('hide');
-                } else {
-                    alert('일정 삭제에 실패했습니다.');
-                }
-            }).fail(function () {
-                alert('error');
-            }); 
-        }
+        
+        Swal.fire({
+            title: "삭제",
+            text: "일정을 삭제 하시겠습니까?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "확인",
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const id = $('#todoId').val();
+                plan.util.AJAX_Json(`/api/todos/${id}`, '', 'DELETE', 'json').done(function (response) {
+                    if (response.status === 200) {
+                        calendar.refetchEvents();
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.message,
+                        }).then(() => {
+                            $('#todoModal').modal('hide');
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "오류",
+                            text: '일정 삭제에 실패했습니다.',
+                            icon: "error"
+                        });
+                    }
+                }).fail(function(jqXHR) {
+                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+                    Swal.fire({
+                        title: "오류",
+                        text: errorMessage,
+                        icon: "error"
+                    });
+                });
+            }
+        });
     });
     
     calendar.render();
 });
+
+function isValidation(data){
+    const startDay = new Date($('#todoStart').val());
+    const endDay = new Date($('#todoEnd').val());
+    if(plan.util.isEmpty(data.title)){
+        Toast.fire({
+            icon : 'warning',
+            title : '제목을 확인해주세요.'
+        });
+        return false;
+    } else if(plan.util.isEmpty(data.todoEnd) || plan.util.isEmpty(data.todoStart)){
+        Toast.fire({
+            icon : 'warning',
+            title : '날짜를 확인해주세요.'
+        });
+        return false;
+    } else if( startDay >= endDay ) {
+        Toast.fire({
+            icon: 'warning',
+            title: '종료날짜가 시작날짜보다<br> 같거나 작을 수 없습니다.'
+        });
+        return false;
+    }
+
+    return true;
+}

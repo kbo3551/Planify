@@ -6,6 +6,8 @@
     <!-- template -->
     <link href="/resources/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/resources/template/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/resources/js/bundle/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <link href="/resources/js/bundle/sweetalert2/custom-sweetalert2.css" rel="stylesheet">
 	<!-- script_start -->
     <!-- template -->
     <script src="/resources/js/bundle/jquery-3.7.1.min.js"></script>
@@ -18,7 +20,8 @@
 
     <!-- common 스크립트 -->
     <script src="/resources/js/common/common.js"></script>
-
+    <!-- 추가 js -->
+    <script src="/resources/js/bundle/sweetalert2/sweetalert2.min.js"></script>
 <!--     <script src="/resources/template/vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->

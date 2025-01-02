@@ -221,8 +221,25 @@ window.plan.util = (function() {
         const minutes = String(now.getMinutes()).padStart(2, '0');
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
-
-
+    
+    /**
+     * SweetAlert2 Toast 함수
+     * @returns {Object} - Toast 객체
+     */
+    function getToast() {
+        return Swal.mixin({
+            toast: true,
+            position: 'center',
+            iconColor: 'white',
+            customClass: {
+                popup: 'colored-toast',
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+        });
+    }
+    
     return {
         isEmpty: isEmpty,
         AJAX_Request: AJAX_Request,
@@ -235,6 +252,7 @@ window.plan.util = (function() {
         addClass : addClass,
         removeClass : removeClass,
         resetForm : resetForm,
-        getToDateTimeISO : getToDateTimeISO
+        getToDateTimeISO : getToDateTimeISO,
+        getToast: getToast
     };
 })();

@@ -39,14 +39,14 @@ public class TodoRestController {
     @PostMapping("/todo")
     public ApiResult<TodoDTO> createTodo(@RequestBody TodoDTO todoDTO) {
         TodoDTO createdTodo = todoService.createTodo(todoDTO);
-        return ApiResult.success(createdTodo);
+        return ApiResult.success("일정이 생성되었습니다.",createdTodo);
     }
 
     // Todo 수정
     @PutMapping("/todos/{todoId}")
     public ApiResult<TodoDTO> updateTodo(@PathVariable Long todoId, @RequestBody TodoDTO updatedTodoDTO) {
         TodoDTO updatedTodo = todoService.updateTodo(todoId, updatedTodoDTO);
-        return ApiResult.success(updatedTodo);
+        return ApiResult.success("일정이 수정되었습니다.",updatedTodo);
     }
 
     // Todo 조회
