@@ -7,8 +7,8 @@
 		<div id='calendar' style="width: 100%;"></div>
 	</div>
 </div>
-<!-- Modal for adding/updating events -->
-<div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" aria-hidden="true">
+<!-- 입력 수정 모달 -->
+<div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" role="dialog" aria-hidden="true" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
