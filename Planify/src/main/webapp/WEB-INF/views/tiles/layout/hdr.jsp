@@ -3,6 +3,10 @@
 <!-- meta_start -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- favicon -->
+    <link href="/resources/favicon_io/favicon.ico" rel="icon" type="image/png">
+    <!-- favicon -->
+    
     <!-- template -->
     <link href="/resources/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/resources/template/css/sb-admin-2.css" rel="stylesheet">
