@@ -20,13 +20,18 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
 
-        // AJAX 요청인 경우 JSON 응답
+        String uri = request.getRequestURI();
+        
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            // AJAX 요청인 경우 JSON 응답
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("{\"error\": \"Unauthorized\"}");
+        } else if (uri.contains("/error/404")) {
+            // 404 처리
+            response.sendRedirect("/error/404");
         } else {
-            // 일반 요청은 로그인 페이지로 리다이렉트
+            // 일반 요청은 로그인 페이지
             response.sendRedirect("/login");
         }
     }
