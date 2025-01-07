@@ -1,4 +1,5 @@
 Planify/src/main/webapp/resources/template/** linguist-detectable=false
+Planify/src/main/webapp/resources/js/bundle/** linguist-detectable=false
 *.html linguist-detectable=false
 *.css linguist-detectable=false
 *.scss linguist-detectable=false
