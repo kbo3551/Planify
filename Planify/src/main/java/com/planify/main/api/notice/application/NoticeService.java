@@ -10,6 +10,7 @@ import com.planify.main.api.member.infrastructure.MemberRepository;
 import com.planify.main.api.notice.application.dto.NoticeDTO;
 import com.planify.main.api.notice.domain.Notice;
 import com.planify.main.api.notice.infrastructure.NoticeRepository;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 /**
@@ -25,8 +26,8 @@ public class NoticeService {
 
     public List<NoticeDTO> getAllNotices() {
         return noticeRepository.findAll().stream()
-            .map(NoticeDTO::ofEntity)
-            .toList();
+                .map(NoticeDTO::ofEntity)
+                .collect(Collectors.toList());
     }
 
     @Transactional

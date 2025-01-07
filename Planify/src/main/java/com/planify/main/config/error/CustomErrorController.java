@@ -31,6 +31,6 @@ public class CustomErrorController implements ErrorController {
             }
         }
 
-        return "error/error";
+        return "error/error.body";
     }
 }
