@@ -26,13 +26,6 @@
     <script src="/resources/js/common/common.js"></script>
     <!-- 추가 js -->
     <script src="/resources/js/bundle/sweetalert2/sweetalert2.min.js"></script>
-<!--     <script src="/resources/template/vendor/chart.js/Chart.min.js"></script> -->
-
-    <!-- Page level custom scripts -->
-<!--     <script src="/resources/template/js/demo/chart-area-demo.js"></script> -->
-<!--     <script src="/resources/template/js/demo/chart-pie-demo.js"></script> -->
-	
-
 	<!-- script_end -->
 
 <!-- meta_end -->
