@@ -15,13 +15,15 @@ public class AddMemberDTO {
     private String name;
 //    @Enumerated(EnumType.STRING)
     private Gender gender;
+    private boolean isAdmin;
 
     @Builder
-    public AddMemberDTO(String memberId, String password, String nickName, String name, Gender gender) {
+    public AddMemberDTO(String memberId, String password, String nickName, String name, Gender gender, boolean isAdmin) {
         this.memberId = memberId;
         this.password = password;
         this.nickName = nickName;
         this.name = name;
         this.gender = gender;
+        this.isAdmin = isAdmin;
     }
 }

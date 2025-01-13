@@ -1,9 +1,10 @@
 package com.planify.main.config.security;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.planify.main.api.member.domain.Member;
@@ -25,10 +26,12 @@ public class CustomUserDetails implements UserDetails {
         return member;
     }
 
+    // 권한 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 권한 설정 추후 필요할 시 작업
-        return Collections.emptyList();
+    	return member.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
     }
 
     @Override

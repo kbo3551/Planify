@@ -1486,3 +1486,25 @@ drop from admin_roles [42001-214]
 2025-01-12 18:35:53 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop [*]talbe admin_roles"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
 drop talbe admin_roles [42001-214]
+2025-01-13 13:57:42 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO [*]( MEMBER_NO, ROLE_ID, REG_DT ) VALUES ( 2, 1, NOW() )"; expected "identifier"; SQL statement:
+INSERT INTO ( MEMBER_NO, ROLE_ID, REG_DT ) VALUES ( 2, 1, NOW() ) [42001-214]
+2025-01-13 13:58:44 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT [*]MEMBER_ROLES INTO ( MEMBER_NO, ROLE_ID, REG_DT ) VALUES ( 2, 1, NOW() )"; expected "IGNORE, INTO"; SQL statement:
+INSERT MEMBER_ROLES INTO ( MEMBER_NO, ROLE_ID, REG_DT ) VALUES ( 2, 1, NOW() ) [42001-214]
+2025-01-13 14:18:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROLE" not found; SQL statement:
+select roles0_.member_no as member_n1_1_0_, roles0_.role_id as role_id2_1_0_, role1_.role_id as role_id1_3_1_, role1_.role_name as role_nam2_3_1_ from member_roles roles0_ inner join role role1_ on roles0_.role_id=role1_.role_id where roles0_.member_no=? [42102-214]
+2025-01-13 14:49:12 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO MEMBER_ROLES ( \000d\000aSELECT * FROM MEMBER_ROLES[*]"; expected "., TABLE (, (, USE, AS, RIGHT, LEFT, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP BY, HAVING, WINDOW, QUALIFY, INTERSECT, UNION, EXCEPT, MINUS, ORDER BY, OFFSET, FETCH, LIMIT, FOR, )"; SQL statement:
+INSERT INTO MEMBER_ROLES ( 
+SELECT * FROM MEMBER_ROLES [42001-214]
+2025-01-13 14:49:22 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO MEMBER_ROLES ([*]"; expected "identifier"; SQL statement:
+INSERT INTO MEMBER_ROLES ( [42001-214]
+2025-01-13 14:49:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO MEMBER_ROLES ( [*]2,2,NOW())"; expected "identifier"; SQL statement:
+INSERT INTO MEMBER_ROLES ( 2,2,NOW()) [42001-214]
+2025-01-13 14:50:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO MEMBER_ROLES ( [*]2,2,NOW())"; expected "identifier"; SQL statement:
+INSERT INTO MEMBER_ROLES ( 2,2,NOW()) [42001-214]
