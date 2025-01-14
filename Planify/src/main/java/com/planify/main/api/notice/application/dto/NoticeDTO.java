@@ -19,16 +19,18 @@ public class NoticeDTO {
 	private LocalDateTime regDt;
 	private LocalDateTime modDt;
 	private Long memberNo;
+	private String regName;
 
 	@Builder
 	public NoticeDTO(Long noticeId, String title, String content,
-			LocalDateTime regDt, LocalDateTime modDt, Long memberNo) {
+			LocalDateTime regDt, LocalDateTime modDt, Long memberNo, String regName) {
 		this.noticeId = noticeId;
 		this.title = title;
 		this.content = content;
 		this.regDt = regDt;
 		this.modDt = modDt;
 		this.memberNo = memberNo;
+		this.regName = regName;
 	}
 	
 	// Entity -> DTO 변환
@@ -40,6 +42,7 @@ public class NoticeDTO {
 			.regDt(notice.getRegDt())
 			.modDt(notice.getModDt())
 			.memberNo(notice.getMember().getMemberNo() != null ? notice.getMember().getMemberNo() : null)
+			.regName(notice.getMember() != null ? notice.getMember().getName() : "Unknown") // 작성자 이름 추가
 			.build();
 	}
 	

@@ -18,16 +18,16 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
     private final MemberRepository memberRepository;
 
     public List<NoticeDTO> getAllNotices() {
-        return noticeRepository.findAll().stream()
-                .map(NoticeDTO::ofEntity)
-                .collect(Collectors.toList());
+    	List<Notice> notices = noticeRepository.findAll();
+        return notices.stream()
+            .map(NoticeDTO::ofEntity)
+            .collect(Collectors.toList());
     }
 
     @Transactional
@@ -59,6 +59,7 @@ public class NoticeService {
             .orElseThrow(() -> new IllegalArgumentException("Notice not found: " + noticeId));
     }
 
+    @Transactional
     public void deleteNoticeById(Long noticeId) {
         if (!noticeRepository.existsById(noticeId)) {
             throw new IllegalArgumentException("Notice not found: " + noticeId);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/main">
@@ -14,10 +14,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item " data-url="/main">
         <a class="nav-link" href="/main">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Main</span></a>
+            <span>Main</span>
+        </a>
     </li>
 
     <!-- Divider -->
@@ -100,11 +101,11 @@
 <!--     </li> -->
 
 <!--     Nav Item - Tables -->
-<!--     <li class="nav-item"> -->
-<!--         <a class="nav-link" href="tables.html"> -->
-<!--             <i class="fas fa-fw fa-table"></i> -->
-<!--             <span>Tables</span></a> -->
-<!--     </li> -->
+    <li class="nav-item" data-url="/notice/list">
+        <a class="nav-link" href="/notice/list">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Notice</span></a>
+    </li>
 
     <!-- Divider -->
 <!--     <hr class="sidebar-divider d-none d-md-block"> -->
@@ -122,4 +123,5 @@
 <!--     </div> -->
 
 </ul>
+<script src="/resources/js/layout/left.js"></script>
 <!-- End of Sidebar -->
