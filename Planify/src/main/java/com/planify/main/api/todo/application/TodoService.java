@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class TodoService {
 
     private final TodoRepository todoRepository;
@@ -55,7 +54,7 @@ public class TodoService {
         return todoRepository.findById(todoId);
     }
 
-
+    @Transactional
     public void deleteTodoById(Long todoId) {
         todoRepository.deleteById(todoId);
     }
