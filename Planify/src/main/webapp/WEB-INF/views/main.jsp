@@ -23,6 +23,14 @@
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="mb-3">
+                        <label for="title" class="form-label">일정 상태</label>
+                        <select type="text" class="form-control" id="status" name="status" required>
+                            <option value="Pending">대기</option>
+                            <option value="Progress">진행</option>
+                            <option value="Completed">완료</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="todoStart" class="form-label">시작 날짜</label>
                         <input type="datetime-local" class="form-control" id="todoStart" name="todoStart" required>
                     </div>

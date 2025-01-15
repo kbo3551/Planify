@@ -27,13 +27,48 @@ $(document).ready(function() {
             const memberNo= $('#userInfo').data('number');
             plan.util.AJAX_Json(`/api/todos/member/`+ memberNo, '', 'GET', 'json').done(function (response) {
                 if (response.status === 200) {
-                    const events = response.data.map(todo => ({
-                        id: todo.todoId,
-                        title: todo.title,
-                        start: todo.startDate,
-                        end: todo.endDate,
-                        etc : todo.description
-                    }));
+                    const events = response.data.map(todo => {
+                        let backgroundColor, borderColor, textColor;
+                        // 상태에 따른 색깔 변경
+                        switch (todo.status) {
+                            case "Pending":
+                                // 주황
+                                backgroundColor = "#FF8A65";
+                                borderColor = "#FF7043";
+                                textColor = "#FFFFFF";
+                                break;
+                            case "Progress":
+                                // 파랑
+                                backgroundColor = "#81D4FA";
+                                borderColor = "#4FC3F7";
+                                textColor = "#FFFFFF";
+                                break;
+                            case "Completed":
+                                // 초록
+                                backgroundColor = "#A5D6A7";
+                                borderColor = "#81C784";
+                                textColor = "#FFFFFF";
+                                break;
+                            default:
+                                backgroundColor = "#FF8A65";
+                                borderColor = "#FF7043";
+                                textColor = "#FFFFFF";
+                                break;
+                        }
+                
+                        return {
+                            id: todo.todoId,
+                            title: todo.title,
+                            start: todo.startDate,
+                            end: todo.endDate,
+                            etc: todo.description,
+                            status: todo.status,
+                            backgroundColor: backgroundColor,
+                            borderColor: borderColor,
+                            textColor: textColor
+                        };
+                    });
+                
                     successCallback(events);
                 } else {
                     Swal.fire({
@@ -57,6 +92,7 @@ $(document).ready(function() {
             $('#todoStart').val(event.startStr.slice(0, 16));
             $('#todoEnd').val(event.endStr.slice(0, 16));
             $('#description').val(event.extendedProps.etc);
+            $('#status').val(event.extendedProps.status);
             $('#todoModal').modal('show');
             $('#todoRemoveBtn').show();
         },

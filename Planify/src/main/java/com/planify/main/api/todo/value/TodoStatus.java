@@ -6,9 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum TodoStatus {
     PENDING("Pending"),
     PROGRESS("Progress"),
-    COMPLETED("Completed"),
-    CANCELLED("Cancelled");
-
+    COMPLETED("Completed");
+	
     private final String displayName;
 
     TodoStatus(String displayName) {
