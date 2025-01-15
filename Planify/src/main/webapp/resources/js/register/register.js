@@ -9,7 +9,6 @@ $(document).ready(function() {
         const data = plan.util.fetchFormData('registerForm');
 
         plan.util.AJAX_Json('/api/login/register', data, 'POST', 'json').done(function(response) {
-            alert(response.message);
             if( response.status === 200 ){
                 Swal.fire({
                   title: "회원가입 성공",

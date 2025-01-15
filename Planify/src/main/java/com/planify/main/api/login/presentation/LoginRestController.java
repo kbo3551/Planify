@@ -38,7 +38,8 @@ public class LoginRestController {
                     addMemberDTO.getPassword(),
                     addMemberDTO.getNickName(),
                     addMemberDTO.getName(),
-                    addMemberDTO.getGender()
+                    addMemberDTO.getGender(),
+                    addMemberDTO.isAdmin()
             );
             return ApiResult.success("회원가입 성공", null);
         } catch (IllegalArgumentException e) {

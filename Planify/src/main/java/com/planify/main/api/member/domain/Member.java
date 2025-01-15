@@ -1,17 +1,24 @@
 package com.planify.main.api.member.domain;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.planify.main.api.member.value.Gender;
+import com.planify.main.api.roles.domain.Roles;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +47,7 @@ public class Member {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING) // Enum 값
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
@@ -49,6 +56,14 @@ public class Member {
 
     @Column(name = "mod_dt")
     private LocalDateTime modDt;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "member_roles",
+        joinColumns = @JoinColumn(name = "member_no"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Roles> roles = new HashSet<>();
 
     @Builder
     public Member(String memberId, String password, String nickName, String name, Gender gender, LocalDateTime regDt, LocalDateTime modDt) {
@@ -59,5 +74,9 @@ public class Member {
         this.gender = gender;
         this.regDt = regDt;
         this.modDt = modDt;
+    }
+
+    public void addRole(Roles role) {
+        this.roles.add(role);
     }
 }
