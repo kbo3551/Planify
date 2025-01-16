@@ -27,16 +27,17 @@ public enum Gender {
 
     // JSON에서 Enum 변환 시 사용
     @JsonCreator
-    public static Gender fromCode(String code) {
-        if (code == null || code.trim().isEmpty()) {
-            throw new IllegalArgumentException("Gender code cannot be null or empty");
-        }
-        for (Gender gender : Gender.values()) {
-            if (gender.name().equalsIgnoreCase(code.trim())) {
-
-                return gender;
+    public static Gender fromCode(Object input) {
+        if (input instanceof String) {
+            String code = ((String) input).trim();
+            for (Gender gender : Gender.values()) {
+                if (gender.name().equalsIgnoreCase(code)) {
+                    return gender;
+                }
             }
+        } else if (input instanceof Gender) {
+            return (Gender) input;
         }
-        throw new IllegalArgumentException("Invalid gender code: " + code);
+        throw new IllegalArgumentException("Invalid gender input: " + input);
     }
 }

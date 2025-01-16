@@ -2,6 +2,7 @@ package com.planify.main.api.todo.value;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.planify.main.api.member.value.Gender;
 
 public enum TodoStatus {
     PENDING("Pending"),
@@ -24,15 +25,17 @@ public enum TodoStatus {
     }
 
     @JsonCreator
-    public static TodoStatus fromCode(String code) {
-        if (code == null || code.trim().isEmpty()) {
-            throw new IllegalArgumentException("TodoStatus code cannot be null or empty");
-        }
-        for (TodoStatus status : TodoStatus.values()) {
-            if (status.name().equalsIgnoreCase(code.trim())) {
-                return status;
+    public static TodoStatus fromCode(Object input) {
+        if (input instanceof String) {
+            String code = ((String) input).trim();
+            for (TodoStatus todoStatus : TodoStatus.values()) {
+                if (todoStatus.name().equalsIgnoreCase(code)) {
+                    return todoStatus;
+                }
             }
+        } else if (input instanceof TodoStatus) {
+            return (TodoStatus) input;
         }
-        throw new IllegalArgumentException("Invalid TodoStatus code: " + code);
+        throw new IllegalArgumentException("Invalid gender input: " + input);
     }
 }

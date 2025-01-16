@@ -35,7 +35,7 @@ public class NoticeRestController {
     @PostMapping("/notices")
     public ApiResult<NoticeDTO> createNotice(@RequestBody NoticeDTO noticeDTO) {
         NoticeDTO createdNotice = noticeService.createNotice(noticeDTO);
-        return ApiResult.success("공지사항이 생성되었습니다.", createdNotice);
+        return ApiResult.success("공지사항이 등록되었습니다.", createdNotice);
     }
 
     // 공지사항 수정

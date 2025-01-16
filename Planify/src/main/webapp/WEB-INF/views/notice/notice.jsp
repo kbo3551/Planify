@@ -38,12 +38,12 @@
             <div class="modal-body">
                 <form id="noticeForm">
                     <div class="form-group">
-                        <label for="titleInput">제목</label>
-                        <input type="text" class="form-control" id="titleInput" placeholder="제목을 입력하세요">
+                        <label for="title">제목</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
                     </div>
                     <div class="form-group">
-                        <label for="contentInput">내용</label>
-                        <textarea class="form-control" id="contentInput" rows="5" placeholder="내용을 입력하세요"></textarea>
+                        <label for="content">내용</label>
+                        <textarea class="form-control" id="content" name="content" placeholder="내용을 입력하세요" required rows="5" cols="3" style="resize: none;"></textarea>
                     </div>
                 </form>
             </div>
@@ -66,6 +66,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <p><strong>등록일:</strong> <span id="regDt"></span></p>
+                <p><strong>작성자:</strong> <span id="regName"></span></p>
                 <p><strong>제목:</strong> <span id="detailTitle"></span></p>
                 <p><strong>내용:</strong></p>
                 <p id="detailContent"></p>
