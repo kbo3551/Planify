@@ -18,6 +18,18 @@ $(document).ready(function() {
                 }).then(() => {
                     window.location.href = '/login';
                 });
+            } else if( response.status === 400 ){
+                Swal.fire({
+                    title: "확인하세요",
+                    text: response.message,
+                    icon: "info"
+                });
+            } else {
+                Swal.fire({
+                    title: "확인하세요",
+                    text: response.message,
+                    icon: "info"
+                });
             }
         }).fail(function(jqXHR) {
             const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
