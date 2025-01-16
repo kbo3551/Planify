@@ -52,7 +52,7 @@
     </div>
 </div>
 
-<div style="display: block" id="userInfo" data-number="<c:out escapeXml="true" value="${memberNo}" />"></div>
+<%-- <div style="display: block" id="userInfo" data-number="<c:out escapeXml="true" value="${memberNo}" />"></div> --%>
 
 <script src="/resources/js/bundle/fullcalendar-6.1.15/index.global.min.js"></script>
 <script src="/resources/js/main/main.js"></script>

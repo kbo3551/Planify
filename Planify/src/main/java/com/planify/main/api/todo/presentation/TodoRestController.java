@@ -27,9 +27,10 @@ public class TodoRestController {
     private final TodoService todoService;
 
     // 회원별 Todo 목록 조회 (DTO로 변환하여 반환)
-    @GetMapping("/todos/member/{memberNo}")
-    public ApiResult<List<TodoDTO>> getTodosByMember(@PathVariable Long memberNo) {
-        List<TodoDTO> todos = todoService.getAllTodosByMember(memberNo).stream()
+    @GetMapping("/todos/member")
+    public ApiResult<List<TodoDTO>> getTodosByMember() {
+    	
+        List<TodoDTO> todos = todoService.getAllTodosByMember().stream()
                                          .map(TodoDTO::ofEntity)
                                          .collect(Collectors.toList());
         return ApiResult.success(todos);

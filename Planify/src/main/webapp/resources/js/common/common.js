@@ -2,11 +2,13 @@
  * common.js
  */
 $(document).ready(function() {
-    // plan.util.init();
+    
 });
 
 if (typeof window.plan === 'undefined') {
-    window.plan = new Object();
+    window.plan = {
+         util : new Object()
+    }
 }
 
 window.plan.util = (function() {
@@ -240,6 +242,22 @@ window.plan.util = (function() {
         });
     }
     
+    function getAuthenticatedUserInfo(){
+        let dfd = $.Deferred();
+        AJAX_Json('/api/user/info', '', 'GET', 'json').done(function (response) {
+            if (response.status === 200) {
+                dfd.resolve(response.data);
+            } else {
+                dfd.reject('Error: ' + response.message);
+            }
+        })
+        .fail(function (jqXHR) {
+            const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+            dfd.reject(errorMessage);
+        });
+        return dfd.promise();
+    }
+    
     return {
         isEmpty: isEmpty,
         AJAX_Request: AJAX_Request,
@@ -253,6 +271,7 @@ window.plan.util = (function() {
         removeClass : removeClass,
         resetForm : resetForm,
         getToDateTimeISO : getToDateTimeISO,
-        getToast: getToast
+        getToast: getToast,
+        getAuthenticatedUserInfo : getAuthenticatedUserInfo,
     };
 })();

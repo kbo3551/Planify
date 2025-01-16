@@ -10,7 +10,7 @@ public class NoticeController {
 	
 	@GetMapping("/list")
     public String loginPage() {
-        return "/notice/noticeList";
+        return "/notice/notice";
     }
 
 }

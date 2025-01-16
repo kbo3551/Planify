@@ -1,11 +1,9 @@
 /**
- * 테스트 fullcalendar
- * TODO : 작업 시 동적 데이터 통신 및 다듬기
- * 
+ * 일정관리 [fullcalendar]
  */
 const Toast = plan.util.getToast();
 $(document).ready(function() {
-    
+
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -24,8 +22,7 @@ $(document).ready(function() {
             listMonth: { buttonText: '일정목록' }
         },
         events: function (info, successCallback, failureCallback) {
-            const memberNo= $('#userInfo').data('number');
-            plan.util.AJAX_Json(`/api/todos/member/`+ memberNo, '', 'GET', 'json').done(function (response) {
+            plan.util.AJAX_Json(`/api/todos/member`, '', 'GET', 'json').done(function (response) {
                 if (response.status === 200) {
                     const events = response.data.map(todo => {
                         let backgroundColor, borderColor, textColor;
@@ -133,8 +130,6 @@ $(document).ready(function() {
 
             const id = $('#todoId').val();
             const todo = plan.util.fetchFormData('todoForm');
-
-            todo.memberNo = $('#userInfo').data('number');
 
             // todo.startDate = new Date($('#todoStart').val()).toISOString();
             // todo.endDate = new Date($('#todoEnd').val()).toISOString();

@@ -10,6 +10,8 @@ import com.planify.main.api.member.infrastructure.MemberRepository;
 import com.planify.main.api.notice.application.dto.NoticeDTO;
 import com.planify.main.api.notice.domain.Notice;
 import com.planify.main.api.notice.infrastructure.NoticeRepository;
+import com.planify.main.config.security.AuthenticatedUserUtil;
+
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,9 @@ public class NoticeService {
 
     @Transactional
     public NoticeDTO createNotice(NoticeDTO noticeDTO) {
-        Member member = memberRepository.findById(noticeDTO.getMemberNo())
+    	
+    	Member authenticatedUser = AuthenticatedUserUtil.getAuthenticatedUser();
+        Member member = memberRepository.findById(authenticatedUser.getMemberNo())
             .orElseThrow(() -> new IllegalArgumentException("Invalid memberNo: " + noticeDTO.getMemberNo()));
 
         Notice notice = noticeDTO.toEntity(member);
@@ -43,10 +47,11 @@ public class NoticeService {
 
     @Transactional
     public NoticeDTO updateNotice(Long noticeId, NoticeDTO noticeDTO) {
+    	Member authenticatedUser = AuthenticatedUserUtil.getAuthenticatedUser();
         Notice notice = noticeRepository.findById(noticeId)
             .orElseThrow(() -> new IllegalArgumentException("Invalid NoticeId: " + noticeId));
 
-        Member member = memberRepository.findById(noticeDTO.getMemberNo())
+        Member member = memberRepository.findById(authenticatedUser.getMemberNo())
             .orElseThrow(() -> new IllegalArgumentException("Invalid memberNo: " + noticeDTO.getMemberNo()));
 
         notice.update(noticeDTO.getTitle(), noticeDTO.getContent(), member);
