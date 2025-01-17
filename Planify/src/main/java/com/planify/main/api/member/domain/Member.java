@@ -79,4 +79,16 @@ public class Member {
     public void addRole(Roles role) {
         this.roles.add(role);
     }
+    
+    public void updateInfo(String nickName, String name, Gender gender) {
+        this.nickName = nickName;
+        this.name = name;
+        this.gender = gender;
+        this.modDt = LocalDateTime.now();
+    }
+    
+    public void updatePassword(String password) {
+        this.password = password;
+        this.modDt = LocalDateTime.now();
+    }
 }

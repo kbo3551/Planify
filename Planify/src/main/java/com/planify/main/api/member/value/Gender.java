@@ -14,30 +14,45 @@ public enum Gender {
         this.displayName = displayName;
     }
 
-    // DB에 저장 or 로직 내부에서 사용할 값 (ex]M, W)
+    // DB에 저장하거나 로직 내부에서 사용할 값 (M, W)
     public String getCode() {
         return this.name();
     }
 
-    // 표출 데이터 값 (ex]MALE, FEMALE)
+    // 화면에 출력할 값 (MALE, FEMALE)
     @JsonValue
     public String getDisplayName() {
         return displayName;
     }
 
-    // JSON에서 Enum 변환 시 사용
+    // JSON -> Enum 변환
     @JsonCreator
-    public static Gender fromCode(Object input) {
-        if (input instanceof String) {
-            String code = ((String) input).trim();
-            for (Gender gender : Gender.values()) {
-                if (gender.name().equalsIgnoreCase(code)) {
-                    return gender;
-                }
-            }
-        } else if (input instanceof Gender) {
-            return (Gender) input;
+    public static Gender fromDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Gender display name cannot be null or empty");
         }
-        throw new IllegalArgumentException("Invalid gender input: " + input);
+
+        for (Gender gender : Gender.values()) {
+            if (gender.displayName.equalsIgnoreCase(displayName.trim())) {
+                return gender;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid gender display name: " + displayName);
+    }
+
+    // DB 코드(M/W) -> Enum 변환
+    public static Gender fromCode(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            throw new IllegalArgumentException("Gender code cannot be null or empty");
+        }
+
+        for (Gender gender : Gender.values()) {
+            if (gender.name().equalsIgnoreCase(code.trim())) {
+                return gender;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid gender code: " + code);
     }
 }

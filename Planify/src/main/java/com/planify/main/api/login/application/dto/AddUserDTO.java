@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AddMemberDTO {
+public class AddUserDTO {
     private String memberId;
     private String password;
     private String nickName;
@@ -18,7 +18,7 @@ public class AddMemberDTO {
     private boolean isAdmin;
 
     @Builder
-    public AddMemberDTO(String memberId, String password, String nickName, String name, Gender gender, boolean isAdmin) {
+    public AddUserDTO(String memberId, String password, String nickName, String name, Gender gender, boolean isAdmin) {
         this.memberId = memberId;
         this.password = password;
         this.nickName = nickName;

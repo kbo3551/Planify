@@ -46,8 +46,8 @@
                                 </div>
                                 <div class="form-group">
                                     <select name="gender" id="gender" class="custom-select form-control" required>
-							            <option value="M">남자</option>
-							            <option value="W">여자</option>
+							            <option value="MALE">남자</option>
+                                        <option value="FEMALE">여자</option>
 							        </select>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block" type="submit">회원가입</button>
