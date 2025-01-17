@@ -27,25 +27,23 @@ function dataTableInit(isAdmin) {
     // DataTable 초기화
     $('#noticeTable').DataTable({
         ajax: function (data, callback, settings) {
-            plan.util.AJAX_Json('/api/notices', '', 'GET', 'json')
-                .done(function (response) {
-                    if (response.status === 200) {
-                        var noticesWithIndex = response.data.map(function (item, index) {
-                            item.index = index + 1;
-                            return item;
-                        });
+            plan.util.AJAX_Json('/api/notices', '', 'GET', 'json').done(function (response) {
+                if (response.status === 200) {
+                    var noticesWithIndex = response.data.map(function (item, index) {
+                        item.index = index + 1;
+                        return item;
+                    });
 
-                        callback({ data: noticesWithIndex });
-                    } else {
-                        Swal.fire({
-                            title: "Error",
-                            text: response.message,
-                            icon: "error"
-                        });
-                        callback({ data: [] });
-                    }
-                })
-                .fail(showError);
+                    callback({ data: noticesWithIndex });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: response.message,
+                        icon: "error"
+                    });
+                    callback({ data: [] });
+                }
+            }).fail(showError);
         },
         columns: columns,
         order: [[3, 'desc']],
@@ -116,7 +114,7 @@ function eventListener() {
 }
 
 function createNotice(notice) {
-    plan.util.AJAX_Json('/api/notices', notice, 'POST', 'json').done((response) => {
+    plan.util.AJAX_Json('/admin/api/notices', notice, 'POST', 'json').done((response) => {
         Toast.fire({
             icon: 'success',
             title: response.message,
@@ -124,11 +122,11 @@ function createNotice(notice) {
             $('#createModal').modal('hide');
             reloadList();
         });
-    });
+    }).fail(showError);
 }
 
 function updateNotice(noticeId, notice) {
-    plan.util.AJAX_Json(`/api/notices/${noticeId}`, notice, 'PUT', 'json').done((response) => {
+    plan.util.AJAX_Json(`/admin/api/notices/${noticeId}`, notice, 'PUT', 'json').done((response) => {
         Toast.fire({
             icon: 'success',
             title: response.message,
@@ -136,7 +134,7 @@ function updateNotice(noticeId, notice) {
             $('#createModal').modal('hide');
             reloadList();
         });
-    });
+    }).fail(showError);
 }
 
 function deleteNotice(noticeId) {
@@ -151,7 +149,7 @@ function deleteNotice(noticeId) {
         cancelButtonText: '취소'
     }).then((result) => {
         if (result.isConfirmed) {
-            plan.util.AJAX_Json(`/api/notices/${noticeId}`, '', 'DELETE', 'json').done((response) => {
+            plan.util.AJAX_Json(`/admin/api/notices/${noticeId}`, '', 'DELETE', 'json').done((response) => {
                 Toast.fire({
                     icon: 'success',
                     title: response.message,
@@ -159,7 +157,7 @@ function deleteNotice(noticeId) {
                     $('#createModal').modal('hide');
                     reloadList();
                 });
-            });
+            }).fail(showError);
         }
     });
 }
@@ -171,11 +169,11 @@ function viewDetail(noticeId) {
         $('#detailTitle').text(response.data.title);
         $('#detailContent').text(response.data.content);
         $('#detailModal').modal('show');
-    });
+    }).fail(showError);
 }
 
 function editNotice(noticeId) {
-    plan.util.AJAX_Json(`/api/notices/${noticeId}`, '', 'GET', 'json').done((response) => {
+    plan.util.AJAX_Json(`/admin/api/notices/${noticeId}`, '', 'GET', 'json').done((response) => {
         $('#title').val(response.data.title);
         $('#content').val(response.data.content);
         $('#saveNoticeBtn').data('id', noticeId);
@@ -189,7 +187,7 @@ function reloadList() {
 
 // 에러처리
 function showError(jqXHR) {
-    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
+    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.message : '알 수 없는 오류';
     Swal.fire({ title: "오류", text: errorMessage, icon: "error" });
 }
 // 날짜 형식

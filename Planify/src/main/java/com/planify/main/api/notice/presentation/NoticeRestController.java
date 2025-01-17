@@ -18,42 +18,41 @@ import com.planify.main.common.ApiResult;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
 @RequiredArgsConstructor
 public class NoticeRestController {
 
     private final NoticeService noticeService;
 
     // 공지사항 목록 조회 (DTO로 변환하여 반환)
-    @GetMapping("/notices")
+    @GetMapping("/api/notices")
     public ApiResult<List<NoticeDTO>> getAllNotices() {
         List<NoticeDTO> notices = noticeService.getAllNotices();
         return ApiResult.success(notices);
     }
 
     // 공지사항 생성
-    @PostMapping("/notices")
+    @PostMapping("/admin/api/notices")
     public ApiResult<NoticeDTO> createNotice(@RequestBody NoticeDTO noticeDTO) {
         NoticeDTO createdNotice = noticeService.createNotice(noticeDTO);
         return ApiResult.success("공지사항이 등록되었습니다.", createdNotice);
     }
 
     // 공지사항 수정
-    @PutMapping("/notices/{noticeId}")
+    @PutMapping("/admin/api/notices/{noticeId}")
     public ApiResult<NoticeDTO> updateNotice(@PathVariable Long noticeId, @RequestBody NoticeDTO updatedNoticeDTO) {
         NoticeDTO updatedNotice = noticeService.updateNotice(noticeId, updatedNoticeDTO);
         return ApiResult.success("공지사항이 수정되었습니다.", updatedNotice);
     }
 
     // 공지사항 조회
-    @GetMapping("/notices/{noticeId}")
+    @GetMapping("/api/notices/{noticeId}")
     public ApiResult<NoticeDTO> getNoticeById(@PathVariable Long noticeId) {
         NoticeDTO notice = noticeService.getNoticeById(noticeId);
         return ApiResult.success(notice);
     }
 
     // 공지사항 삭제
-    @DeleteMapping("/notices/{noticeId}")
+    @DeleteMapping("/admin/api/notices/{noticeId}")
     public ApiResult<Void> deleteNoticeById(@PathVariable Long noticeId) {
         noticeService.deleteNoticeById(noticeId);
         return ApiResult.success("공지사항이 삭제되었습니다.", null);

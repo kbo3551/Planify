@@ -45,7 +45,7 @@ window.plan.util = (function() {
             },
             error: function(jqXHR) {
                 console.error('Error:', url, jqXHR);
-                alert(jqXHR.responseText || 'error');
+                //alert(jqXHR.responseText || 'error');
                 dfd.reject(jqXHR);
             }
         };
