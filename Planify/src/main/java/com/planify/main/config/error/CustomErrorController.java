@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.planify.main.common.ApiResult;
 
+// HTTP Exception 컨트롤러
 @Controller
 public class CustomErrorController implements ErrorController {
 
