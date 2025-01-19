@@ -17,12 +17,14 @@ public class MemberRestController {
 
     private final MemberService memberService;
 
+    // 사용자 정보 조회
     @GetMapping("/api/member/profile")
     public ApiResult<MemberDTO> getProfile() {
         MemberDTO memberDTO = memberService.getMemberInfo();
         return ApiResult.success(memberDTO);
     }
 
+    // 사용자 수정
     @PutMapping("/api/member/profile/update")
     public ApiResult<Void> updateProfile(@RequestBody MemberDTO memberDTO) {
         memberService.updateMemberInfo(memberDTO);

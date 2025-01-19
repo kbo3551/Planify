@@ -30,6 +30,7 @@ public class LoginRestController {
         this.loginService = loginService;
     }
 
+    // 회원가입
     @PostMapping("/register")
     public ApiResult<?> register(@RequestBody AddUserDTO addUserDTO) {
         try {
@@ -47,19 +48,26 @@ public class LoginRestController {
         }
     }
 
+    // 로그인
     @PostMapping
     public ApiResult<?> login(@RequestBody Login login, HttpSession session) {
+    	// 사용자 인증 여부 확인
         boolean isAuthenticated = loginService.authenticate(login.getMemberId(), login.getPassword());
 
         if (isAuthenticated) {
+        	// 회원 정보를 조회
             Member member = loginService.findByMemberId(login.getMemberId());
+            // CustomUserDetails로 Member 감싸기
             CustomUserDetails userDetails = new CustomUserDetails(member);
 
+            // Spring Security의 Authentication 객체 생성
             Authentication auth = new UsernamePasswordAuthenticationToken(
                     userDetails, null, userDetails.getAuthorities()
             );
-
+            // Spring Security의 SecurityContext에 Authentication 객체 저장
             SecurityContextHolder.getContext().setAuthentication(auth);
+            
+            // 세션에 Spring Security의 컨텍스트(SecurityContext)를 저장
             session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
             return ApiResult.success("로그인 성공", Map.of("redirectUrl", "/main"));

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="card shadow mb-4">
 	<div class="card-header py-3 d-flex justify-content-between align-items-center">
-	    <h6 class="m-0 font-weight-bold text-primary">NoticeList</h6>
+	    <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
 	    <button type="button" class="btn btn-primary" id="createBtn" style="display: none;" data-toggle="modal" data-target="#createModal">등록</button>
 	</div>
 
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">내용</label>
-                        <textarea class="form-control" id="content" name="content" placeholder="내용을 입력하세요" required rows="5" cols="3" style="resize: none;"></textarea>
+                        <textarea class="form-control" id="niticeContent" name="content" placeholder="내용을 입력하세요" required rows="5" cols="3" style="resize: none;"></textarea>
                     </div>
                 </form>
             </div>
