@@ -9,7 +9,7 @@ $(document).ready(function() {
 // 헤더 영역 이름표시
 function displayName(){
     plan.util.getAuthenticatedUserInfo().done(function(userInfo) {
-        $('#nameTag').text(userInfo.name);
+        $('#nameTag').text(userInfo.nickName);
     }).fail(function(error) {
         console.error(error);
         $('#nameTag').text('UNKNOWN');
