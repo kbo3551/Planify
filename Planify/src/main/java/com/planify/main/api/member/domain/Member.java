@@ -66,7 +66,8 @@ public class Member {
     private Set<Roles> roles = new HashSet<>();
 
     @Builder
-    public Member(String memberId, String password, String nickName, String name, Gender gender, LocalDateTime regDt, LocalDateTime modDt) {
+    public Member(Long memberNo, String memberId, String password, String nickName, String name, Gender gender, LocalDateTime regDt, LocalDateTime modDt) {
+    	this.memberNo = memberNo;
         this.memberId = memberId;
         this.password = password;
         this.nickName = nickName;
@@ -90,5 +91,9 @@ public class Member {
     public void updatePassword(String password) {
         this.password = password;
         this.modDt = LocalDateTime.now();
+    }
+    
+    public void updateMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

@@ -71,6 +71,7 @@ function dataTableInit(isAdmin) {
                 $('.dataTables_paginate').show(); // 페이징 보이기
             }
         },
+        destroy : true,
     });
 }
 
