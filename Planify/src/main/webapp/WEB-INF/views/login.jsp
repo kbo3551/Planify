@@ -30,12 +30,15 @@
                                             로그인
                                         </button>
                                         <hr>
-<!--                                         <a href="index.html" class="btn btn-google btn-user btn-block"> -->
-<!--                                             <i class="fab fa-google fa-fw"></i> Login with Google -->
-<!--                                         </a> -->
-                                         <a href="/oauth2/authorization/kakao" class="btn  btn-user btn-block">
-                                             <img src="/resources/image/kakao_login_medium_wide.png" alt="Kakao Logo">
-                                         </a>
+<%--                                         <a href="index.html" class="btn btn-google btn-user btn-block">--%>
+<%--                                             <i class="fab fa-google fa-fw"></i> Login with Google--%>
+<%--                                         </a>--%>
+<%--                                        <div class="text-center">--%>
+                                            <a href="/oauth2/authorization/kakao" class="btn btn-user btn-block" >
+                                                <img src="/resources/image/kakao_login_medium_wide.png" alt="Kakao Logo" class="img-fluid" style="width: 120%;max-width: 100%; height: auto; border-radius: 10rem;">
+                                            </a>
+<%--                                        </div>--%>
+
                                     </form>
                                     <hr>
 <!--                                     <div class="text-center"> -->
