@@ -231,14 +231,14 @@ window.plan.util = (function() {
     function getToast() {
         return Swal.mixin({
             toast: true,
-            position: 'center',
+            position: 'top-end', // 상단 오른쪽으로 위치 변경
             iconColor: 'white',
             customClass: {
-                popup: 'colored-toast',
+                popup: 'colored-toast', // 커스텀 클래스 유지
             },
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
+            showConfirmButton: false, // 확인 버튼 숨김
+            timer: 1500, // 1.5초 후 자동 닫힘
+            timerProgressBar: true, // 진행 바 표시
         });
     }
     
