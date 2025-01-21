@@ -19,17 +19,22 @@ public class MemberDTO {
     private String password;
     private String nickName;
     private String name;
-    private String gender; 		// MALE or FEMALE
+
+    private String gender; // MALE or FEMALE
+    private boolean socialLogin; // 소셜 로그인 여부
+    private String socialProvider; // 소셜 로그인 제공자
     private Set<String> roles;  // 권한 이름 목록
 
     @Builder
-    public MemberDTO(Long memberNo, String memberId, String password, String nickName, String name, Gender gender, Set<String> roles) {
+    public MemberDTO(Long memberNo, String memberId, String password, String nickName, String name, Gender gender, Set<String> roles, boolean socialLogin, String socialProvider) {
         this.memberNo = memberNo;
         this.memberId = memberId;
         this.password = password;
         this.nickName = nickName;
         this.name = name;
-        this.gender = gender.getDisplayName();
+        this.gender = gender.getDisplayName(); // MALE or FEMALE
+        this.socialLogin = socialLogin;
+        this.socialProvider = socialProvider;
         this.roles = roles;
     }
 

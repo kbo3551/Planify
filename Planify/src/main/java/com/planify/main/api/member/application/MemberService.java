@@ -19,9 +19,18 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     
     public MemberDTO getMemberInfo() {
+
     	Member authenticatedUser = AuthenticatedUserUtil.getAuthenticatedUser();
+
+        if (authenticatedUser == null) {
+            throw new IllegalArgumentException("No authenticated user found");
+        }
+
         Member member = memberRepository.findById(authenticatedUser.getMemberNo())
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + authenticatedUser.getMemberNo()));
+
+        boolean isSocialLogin = member.isSocialLogin();
+
         return MemberDTO.builder()
                 .memberNo(member.getMemberNo())
                 .memberId(member.getMemberId())
@@ -29,6 +38,8 @@ public class MemberService {
                 .nickName(member.getNickName())
                 .name(member.getName())
                 .gender(member.getGender()) // M/W TO MALE/FEMALE
+                .socialLogin(member.isSocialLogin()) // 소셜 로그인 여부 추가
+                .socialProvider(member.isSocialLogin() ? member.getSocialProvider() : null) // 소셜 제공자 추가
                 .build();
     }
 
