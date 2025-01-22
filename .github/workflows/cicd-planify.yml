@@ -50,7 +50,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "Planify/planify.tar.gz"
+        source: "Planify/Planify/planify.tar.gz"
         target: "~/planify.tar.gz"
 
     # Deploy Docker container on server
