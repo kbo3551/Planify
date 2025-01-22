@@ -8,8 +8,8 @@
         <li><strong>Persistence:</strong> JPA</li>
         <li><strong>Build Tool:</strong> Gradle</li>
         <li><strong>Database:</strong> H2 (In-Memory Database)</li>
-        <li><strong>Database:</strong> Spring Security </li>
-        <li><strong>Database:</strong> OAuth2(소셜로그인) </li>
+        <li><strong>Tech:</strong> Spring Security </li>
+        <li><strong>Tech:</strong> OAuth2(소셜로그인) </li>
     </ul>
     <hr>
     <h2>패키지 구조</h2>
