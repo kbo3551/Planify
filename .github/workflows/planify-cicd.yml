@@ -22,29 +22,32 @@ jobs:
 
     # Gradle Build
     - name: Build WAR with Gradle
+      working-directory: Planify
       run: ./gradlew clean build
 
-    # Docker image Build
+    # 4. Docker image Build
     - name: Build Docker image from Dockerfile
+      working-directory: Planify
       run: docker build -t planify:latest .
 
-    # remote server to Docker image
     - name: Save Docker image to archive
+      working-directory: Planify
       run: docker save planify:latest | gzip > planify.tar.gz
 
+    # remote server to Docker image
     - name: Copy Docker image to server
       uses: appleboy/scp-action@v0.2.1
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "planify.tar.gz"
+        source: "Planify/planify.tar.gz"
         target: "~/planify.tar.gz"
 
-    # 6. remote server Docker run
+    # remote server Docker run
     - name: Deploy to server
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i <(echo "${{ secrets.SSH_PRIVATE_KEY }}") ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
         docker load < ~/planify.tar.gz
         docker stop planify || true
         docker rm planify || true
