@@ -32,7 +32,7 @@ spring:
   sql:
     init:
       # first DB set [mode :always &  hibernate ddl-auto : none]
-#      mode: always
+      mode: always
       username: sa
       password:
       schema-locations: classpath*:db/schema.sql
