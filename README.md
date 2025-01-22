@@ -1,19 +1,26 @@
 # Planify
- <p>TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행합니다.</p>
-    <hr>
-    <h2>기술 스택</h2>
-    <ul>
-        <li><strong>Framework:</strong> Spring Boot 2.7.18</li>
-        <li><strong>Language:</strong> Java (JDK 11)</li>
-        <li><strong>Persistence:</strong> JPA</li>
-        <li><strong>Build Tool:</strong> Gradle</li>
-        <li><strong>Database:</strong> H2 (In-Memory Database)</li>
-        <li><strong>Tech:</strong> Spring Security </li>
-        <li><strong>Tech:</strong> OAuth2(소셜로그인) </li>
-    </ul>
-    <hr>
-    <h2>패키지 구조</h2>
-    <pre>
+
+TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 통해 자동화된 빌드를 통한 배포환경 구성
+
+---
+
+## 기술 및 라이브러리
+
+- **Framework**: Spring Boot 2.7.18
+- **Language**: Java (JDK 11)
+- **Persistence**: JPA
+- **Build Tool**: Gradle
+- **Database**: H2 (In-Memory Database)
+- **Tech**: Spring Security
+- **Tech**: OAuth2 (소셜로그인)
+- **Tech**: GitHub Actions (CI/CD)
+- **Tech**: Docker (CI/CD)
+
+---
+
+## 패키지 구조
+
+```plaintext
 com.planify.main
 ├── api
 │   ├── login
@@ -29,14 +36,25 @@ com.planify.main
 │   └── tiles                 // Tiles 뷰 레이아웃 설정
 │   └── (설정 패키지 추가)
 ├── web                       // View를 렌더링하는 컨트롤러 (JSP, Thymeleaf)
-    </pre>
-    <hr>
-    <h2>설계 원칙</h2>
-    <ul>
-        <li><strong>Domain-Driven Design (DDD):</strong> 도메인 중심의 설계를 기반으로 각 도메인을 명확히 분리하여 비즈니스 로직을 관리 원칙</li>
-        <li><strong>패키지 책임 분리:</strong> 각 레이어(application, domain, infrastructure, presentation)는 명확한 역할을 가지며 유지보수성과 확장성을 극대화</li>
-        <li><strong>경량 데이터베이스:</strong> H2 데이터베이스를 활용하여 간편한 테스트 환경을 제공</li>
-    </ul>
+```
+---
 
-<br>![image](https://github.com/user-attachments/assets/fd8ab86f-12b5-44ff-9ec7-84aeb1c6b946)
-<br>![image](https://github.com/user-attachments/assets/4d039294-dc0c-4fcc-a5e5-a4bcf19443bc)
+## 설계 원칙
+
+- **Domain-Driven Design (DDD)**: 도메인 중심의 설계를 기반으로 각 도메인을 명확히 분리하여 비즈니스 로직을 관리 원칙
+- **패키지 책임 분리**: 각 레이어(application, domain, infrastructure, presentation)는 명확한 역할을 가지며 유지보수성과 확장성을 극대화
+- **경량 데이터베이스**: H2 데이터베이스를 활용하여 간편한 테스트 환경을 제공
+
+---
+
+## CI/CD
+
+- **GitHub Actions**: main Branches push를 시작으로 자동으로 빌드 및 테스트가 수행 및 Docker를 통해 배포
+- **Docker**: 컨테이너화된 애플리케이션으로 배포하며 여러 환경에서 일관된 실행을 보장합니다.
+
+---
+
+## 이미지
+
+![image](https://github.com/user-attachments/assets/fd8ab86f-12b5-44ff-9ec7-84aeb1c6b946)
+![image](https://github.com/user-attachments/assets/4d039294-dc0c-4fcc-a5e5-a4bcf19443bc)
