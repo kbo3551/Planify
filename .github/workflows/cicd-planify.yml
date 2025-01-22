@@ -21,6 +21,9 @@ jobs:
         distribution: 'temurin'
 
     # Gradle Build
+    - name: Add execute permissions to gradlew
+      run: chmod +x Planify/gradlew
+    
     - name: Build WAR with Gradle
       working-directory: Planify
       run: ./gradlew clean build
