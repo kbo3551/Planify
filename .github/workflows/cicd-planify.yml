@@ -41,6 +41,12 @@ jobs:
     - name: Push Docker image
       run: docker push "${{ secrets.DOCKER_USERNAME }}/planify:latest"
 
+    # Set permissions for SSH private key
+    - name: Set permissions for SSH private key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > dev.pem
+        chmod 600 dev.pem
+
     # Deploy Docker container on server
     - name: Deploy to server
       run: |
