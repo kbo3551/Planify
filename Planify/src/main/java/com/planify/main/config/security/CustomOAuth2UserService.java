@@ -31,12 +31,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String kakaoId = String.valueOf(attributes.get("id"));
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
+		Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
         String nickname = (String) properties.get("nickname");
 
         Member member = memberRepository.findByMemberId("kakao_" + kakaoId).orElseGet(() -> {

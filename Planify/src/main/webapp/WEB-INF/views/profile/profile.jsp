@@ -19,6 +19,7 @@
                 <select class="form-control" id="gender" name="gender">
                     <option value="MALE">남자</option>
                     <option value="FEMALE">여자</option>
+                    <option value="UNKNOWN">알수없음</option>
                 </select>
             </div>
             <div class="form-group">
