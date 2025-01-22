@@ -50,7 +50,7 @@ com.planify.main
 ## CI/CD
 
 - **GitHub Actions**: main Branches push를 시작으로 자동으로 빌드 및 테스트가 수행 및 Docker를 통해 배포
-- **Docker**: 컨테이너화된 애플리케이션으로 배포하며 여러 환경에서 일관된 실행을 보장합니다.
+- **Docker**: 컨테이너화된 애플리케이션으로 배포하며 여러 환경에서 일관된 실행을 보장.
 
 ---
 
@@ -58,3 +58,6 @@ com.planify.main
 
 ![image](https://github.com/user-attachments/assets/fd8ab86f-12b5-44ff-9ec7-84aeb1c6b946)
 ![image](https://github.com/user-attachments/assets/4d039294-dc0c-4fcc-a5e5-a4bcf19443bc)
+![image](https://github.com/user-attachments/assets/c2bd63c1-89eb-429a-a68e-792a96a4563a)
+![image](https://github.com/user-attachments/assets/ad3b9057-2ce9-45a3-997d-93bb77448314)
+
