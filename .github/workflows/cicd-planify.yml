@@ -44,8 +44,6 @@ jobs:
         ls -lh
         echo "Checking Planify directory contents:"
         ls -lh Planify
-        echo "Checking Planify/Planify directory contents:"
-        ls -lh Planify/Planify
 
     # Set file permissions for SSH private key
     - name: Set permissions for SSH private key
@@ -65,7 +63,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "Planify/Planify/planify.tar.gz"
+        source: "Planify/planify.tar.gz"
         target: "~/planify.tar.gz"
 
     # Deploy Docker container on server
