@@ -22,20 +22,24 @@ jobs:
 
     # Gradle Build
     - name: Add execute permissions to gradlew
-      run: chmod +x Planify/gradlew
+      run: chmod +x Planify/Planify/gradlew
     
     - name: Build WAR with Gradle
-      working-directory: Planify
+      working-directory: Planify/Planify
       run: ./gradlew clean build
 
     # Docker image Build
     - name: Build Docker image from Dockerfile
-      working-directory: Planify
+      working-directory: Planify/Planify
       run: docker build -t planify:latest .
 
     - name: Save Docker image to archive
-      working-directory: Planify
+      working-directory: Planify/Planify
       run: docker save planify:latest | gzip > planify.tar.gz
+
+    # Verify the saved Docker image exists
+    - name: Verify saved Docker image
+      run: ls -lh Planify/Planify/planify.tar.gz
 
     # Set file permissions for SSH private key
     - name: Set permissions for SSH private key
