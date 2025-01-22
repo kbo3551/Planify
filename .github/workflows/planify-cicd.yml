@@ -25,7 +25,7 @@ jobs:
       working-directory: Planify
       run: ./gradlew clean build
 
-    # 4. Docker image Build
+    # Docker image Build
     - name: Build Docker image from Dockerfile
       working-directory: Planify
       run: docker build -t planify:latest .
