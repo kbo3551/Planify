@@ -43,11 +43,6 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > dev.pem
         chmod 600 dev.pem
 
-    # Test SSH connection
-    - name: Test SSH connection
-      run: |
-        ssh -v -o StrictHostKeyChecking=no -i dev.pem ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful'"
-
     # Copy Docker image to server
     - name: Copy Docker image to server
       uses: appleboy/scp-action@v0.1.7
@@ -62,7 +57,7 @@ jobs:
     - name: Deploy to server
       run: |
         ssh -o StrictHostKeyChecking=no -i dev.pem ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-        docker load < ~/planify.tar.gz
+        docker load --input ~/planify.tar.gz
         docker stop planify || true
         docker rm planify || true
         docker run -d --name planify -p 9350:8080 planify:latest
