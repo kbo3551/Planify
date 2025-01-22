@@ -27,9 +27,14 @@ public class LoginService {
 
     // 로그인 기능
     public boolean authenticate(String memberId, String rawPassword) {
-        return memberRepository.findByMemberId(memberId)
-                .map(member -> passwordEncoder.matches(rawPassword, member.getPassword()))
-                .orElse(false);
+        Member member = memberRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + memberId));
+
+        if (member.isSocialLogin()) {
+            throw new IllegalArgumentException("소셜 로그인 사용자는 비밀번호로 로그인할 수 없습니다.");
+        }
+
+        return passwordEncoder.matches(rawPassword, member.getPassword());
     }
 
     public Member findByMemberId(String memberId) {

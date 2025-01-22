@@ -57,16 +57,23 @@ public class Member {
     @Column(name = "mod_dt")
     private LocalDateTime modDt;
 
+    @Column(name = "social_login", nullable = false)
+    private boolean socialLogin = false;
+
+    @Column(name = "social_provider")
+    private String socialProvider;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "member_roles",
-        joinColumns = @JoinColumn(name = "member_no"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "member_roles",
+            joinColumns = @JoinColumn(name = "member_no"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Roles> roles = new HashSet<>();
 
     @Builder
-    public Member(String memberId, String password, String nickName, String name, Gender gender, LocalDateTime regDt, LocalDateTime modDt) {
+    public Member(Long memberNo, String memberId, String password, String nickName, String name, Gender gender, LocalDateTime regDt, LocalDateTime modDt, boolean socialLogin, String socialProvider) {
+    	  this.memberNo = memberNo;
         this.memberId = memberId;
         this.password = password;
         this.nickName = nickName;
@@ -74,21 +81,27 @@ public class Member {
         this.gender = gender;
         this.regDt = regDt;
         this.modDt = modDt;
+        this.socialLogin = socialLogin;
+        this.socialProvider = socialProvider;
     }
 
     public void addRole(Roles role) {
         this.roles.add(role);
     }
-    
+
     public void updateInfo(String nickName, String name, Gender gender) {
         this.nickName = nickName;
         this.name = name;
         this.gender = gender;
         this.modDt = LocalDateTime.now();
     }
-    
+
     public void updatePassword(String password) {
         this.password = password;
         this.modDt = LocalDateTime.now();
+    }
+    
+    public void updateMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

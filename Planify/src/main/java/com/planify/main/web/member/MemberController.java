@@ -6,9 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberController {
 	
+	// Mypage
 	@GetMapping("/member/profile")
 	public String profile() {
 		
 		return "/profile/profile";
+	}
+	
+	// memberInfo
+	@GetMapping("/admin/member")
+	public String memberInfo() {
+		
+		return "/member/member";
 	}
 }

@@ -30,6 +30,7 @@ public class LoginRestController {
         this.loginService = loginService;
     }
 
+    // 회원가입
     @PostMapping("/register")
     public ApiResult<?> register(@RequestBody AddUserDTO addUserDTO) {
         try {
@@ -48,23 +49,29 @@ public class LoginRestController {
     }
 
     @PostMapping
-    public ApiResult<?> login(@RequestBody Login login, HttpSession session) {
+    public ApiResult<?> login(@RequestBody Login login) {
+        Member member = loginService.findByMemberId(login.getMemberId());
+
+        if (member == null) {
+            return ApiResult.failure(HttpStatus.BAD_REQUEST, "User not found");
+        }
+
+        if (member.isSocialLogin()) {
+            return ApiResult.failure(HttpStatus.BAD_REQUEST, "소셜 로그인 사용자는 해당 소셜 계정으로 로그인해주세요.");
+        }
+
         boolean isAuthenticated = loginService.authenticate(login.getMemberId(), login.getPassword());
 
-        if (isAuthenticated) {
-            Member member = loginService.findByMemberId(login.getMemberId());
-            CustomUserDetails userDetails = new CustomUserDetails(member);
-
-            Authentication auth = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities()
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-
-            return ApiResult.success("로그인 성공", Map.of("redirectUrl", "/main"));
-        } else {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 잘못되었습니다.");
+        if (!isAuthenticated) {
+            return ApiResult.failure(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 잘못되었습니다.");
         }
+
+        CustomUserDetails userDetails = new CustomUserDetails(member);
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities()
+        );
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        return ApiResult.success("로그인 성공", Map.of("redirectUrl", "/main"));
     }
 }

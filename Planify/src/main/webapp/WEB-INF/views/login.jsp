@@ -11,7 +11,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Planify 로그인</h1>
+                                        <h1 class="h4 text-gray-900 mb-4"><strong>Planify</strong> 로그인</h1>
                                     </div>
                                     <form class="user" id="loginForm">
                                         <div class="form-group">
@@ -29,13 +29,16 @@
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             로그인
                                         </button>
-<!--                                         <hr> -->
-<!--                                         <a href="index.html" class="btn btn-google btn-user btn-block"> -->
-<!--                                             <i class="fab fa-google fa-fw"></i> Login with Google -->
-<!--                                         </a> -->
-<!--                                         <a href="index.html" class="btn btn-facebook btn-user btn-block"> -->
-<!--                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook -->
-<!--                                         </a> -->
+                                        <hr>
+<%--                                         <a href="index.html" class="btn btn-google btn-user btn-block">--%>
+<%--                                             <i class="fab fa-google fa-fw"></i> Login with Google--%>
+<%--                                         </a>--%>
+<%--                                        <div class="text-center">--%>
+                                            <a href="/oauth2/authorization/kakao" class="btn btn-user btn-block" >
+                                                <img src="/resources/image/kakao_login_medium_wide.png" alt="Kakao Logo" class="img-fluid" style="width: 120%;max-width: 100%; height: auto; border-radius: 10rem;">
+                                            </a>
+<%--                                        </div>--%>
+
                                     </form>
                                     <hr>
 <!--                                     <div class="text-center"> -->

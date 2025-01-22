@@ -1,19 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="/resources/js/bundle/fullcalendar-6.1.15/custom-css/fullcalendar-custom.css" rel="stylesheet" type="text/css">
-
-<div class="col-lg-12">
-    <div class="card mb-4">
-		<div id='calendar' style="width: 100%;"></div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">일정 관리</h6>
+    </div>
+    <div class="card-body">
+		<div class="col-lg-12">
+		    <div class="card mb-4">
+				<div id='calendar' style="width: 100%;"></div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- 입력 수정 모달 -->
 <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" role="dialog" aria-hidden="true" >
-    <div class="modal-dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="todoModalLabel">일정 추가/수정</h5>
-                <button type="button" class="close" id="modal-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="close" id="modal-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="todoForm">
@@ -43,9 +49,10 @@
 <!--                         <input type="text" class="form-control" id="description" name="description"> -->
                         <textarea class="form-control" id="description" name="description" rows="3" cols="3" style="resize: none;"></textarea>
                     </div>
-                    
-                    <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
-                    <button type="button" id="todoRemoveBtn" class="btn btn-danger" style="display: none;">삭제</button>
+                    <div class="modal-footer">
+	                    <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
+	                    <button type="button" id="todoRemoveBtn" class="btn btn-danger" style="display: none;">삭제</button>
+                    </div>
                 </form>
             </div>
         </div>

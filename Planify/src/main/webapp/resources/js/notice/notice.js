@@ -4,6 +4,7 @@ $(document).ready(function () {
     eventListener();
 });
 
+// 데이터 테이블 초기 init
 function dataTableInit(isAdmin) {
     const columns = [
         { data: 'index', width: '10%'},
@@ -46,6 +47,7 @@ function dataTableInit(isAdmin) {
             }).fail(showError);
         },
         columns: columns,
+        // 날짜 Order
         order: [[3, 'desc']],
         language: {
             lengthMenu: "페이지당 _MENU_ 개씩 보기",
@@ -69,9 +71,11 @@ function dataTableInit(isAdmin) {
                 $('.dataTables_paginate').show(); // 페이징 보이기
             }
         },
+        destroy : true,
     });
 }
 
+// 초기설정
 function init(){
     plan.util.getAuthenticatedUserInfo().done(function(userInfo) {
         let isAdmin = userInfo.roles.some(function(role) {
@@ -93,6 +97,7 @@ function init(){
 }
 
 function eventListener() {
+    // 저장버튼 클릭 시 발생
     $('#saveNoticeBtn').on('click', function () {
         const noticeId = $(this).data('id');
         const notice = plan.util.fetchFormData('noticeForm');
@@ -113,6 +118,7 @@ function eventListener() {
     });
 }
 
+// 공지사항 생성
 function createNotice(notice) {
     plan.util.AJAX_Json('/admin/api/notices', notice, 'POST', 'json').done((response) => {
         Toast.fire({
@@ -125,6 +131,7 @@ function createNotice(notice) {
     }).fail(showError);
 }
 
+// 공지사항 수정
 function updateNotice(noticeId, notice) {
     plan.util.AJAX_Json(`/admin/api/notices/${noticeId}`, notice, 'PUT', 'json').done((response) => {
         Toast.fire({
@@ -137,6 +144,7 @@ function updateNotice(noticeId, notice) {
     }).fail(showError);
 }
 
+// 공지사항 삭제
 function deleteNotice(noticeId) {
     Swal.fire({
         title: "삭제",
@@ -162,6 +170,7 @@ function deleteNotice(noticeId) {
     });
 }
 
+// 상세 정보 불러오기
 function viewDetail(noticeId) {
     plan.util.AJAX_Json(`/api/notices/${noticeId}`, '', 'GET', 'json').done((response) => {
         $('#regDt').text(formatDate(response.data.regDt));
@@ -172,15 +181,17 @@ function viewDetail(noticeId) {
     }).fail(showError);
 }
 
+// 수정 정보 불러오기 
 function editNotice(noticeId) {
-    plan.util.AJAX_Json(`/admin/api/notices/${noticeId}`, '', 'GET', 'json').done((response) => {
+    plan.util.AJAX_Json(`/api/notices/${noticeId}`, '', 'GET', 'json').done((response) => {
         $('#title').val(response.data.title);
-        $('#content').val(response.data.content);
+        $('#niticeContent').val(response.data.content);
         $('#saveNoticeBtn').data('id', noticeId);
         $('#createModal').modal('show');
-    });
+    }).fail(showError);
 }
 
+// DataTable 리로드
 function reloadList() {
     $('#noticeTable').DataTable().ajax.reload();
 }
@@ -195,6 +206,7 @@ function formatDate(data) {
     return data ? data.slice(0, 16).replace('T', ' ') : '-';
 }
 
+// 유효성 체크
 function isValidation(data){
 
     if(plan.util.isEmpty(data.title)){

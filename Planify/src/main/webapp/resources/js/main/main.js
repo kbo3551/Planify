@@ -22,6 +22,7 @@ $(document).ready(function() {
             listMonth: { buttonText: '일정목록' }
         },
         events: function (info, successCallback, failureCallback) {
+            // 일정 불러오기
             plan.util.AJAX_Json(`/api/todos/member`, '', 'GET', 'json').done(function (response) {
                 if (response.status === 200) {
                     const events = response.data.map(todo => {
@@ -70,17 +71,11 @@ $(document).ready(function() {
                 } else {
                     Swal.fire({
                       title: "오류",
-                      text: '일정 데이터를 불러오는데 실패했습니다.',
+                      text: response.message,
                       icon: "error"
                     });
                 }
-            }).fail(function () {
-                Swal.fire({
-                  title: "오류",
-                  text: '일정 데이터를 불러오는데 실패했습니다.',
-                  icon: "error"
-                });
-            });
+            }).fail(showError);
         },
         eventClick: function (info) {
             const event = info.event;
@@ -118,6 +113,7 @@ $(document).ready(function() {
         }
     });
 
+    // 저장 버튼 클릭 시 발생
     $('#todoSaveBtn').on('click', function (e) {
         e.preventDefault();
 
@@ -155,14 +151,7 @@ $(document).ready(function() {
                             icon: "error"
                         });
                     }
-                }).fail(function(jqXHR) {
-                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
-                    Swal.fire({
-                        title: "오류",
-                        text: errorMessage,
-                        icon: "error"
-                    });
-                });
+                }).fail(showError);
             } else {
                 // 생성
                 plan.util.AJAX_Json('/api/todo', todo, 'POST', 'json').done(function (response) {
@@ -177,28 +166,22 @@ $(document).ready(function() {
                     } else {
                         Swal.fire({
                             title: "오류",
-                            text: '일정 추가에 실패했습니다.',
+                            text: response.message,
                             icon: "error"
                         });
                     }
-                }).fail(function(jqXHR) {
-                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
-                    Swal.fire({
-                        title: "오류",
-                        text: errorMessage,
-                        icon: "error"
-                    });
-                });
-
+                }).fail(showError);
             }
         }
     });
-
+    
+    // 팝업 닫기
     $('#modal-close').on('click', function (){
         plan.util.resetForm('todoForm');
         $('#todoModal').modal('hide');
     });
 
+    // 일정 삭제 버튼 클릭 시 발생
     $('#todoRemoveBtn').on('click', function(){
         
         Swal.fire({
@@ -229,14 +212,7 @@ $(document).ready(function() {
                             icon: "error"
                         });
                     }
-                }).fail(function(jqXHR) {
-                    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.error : '알 수 없는 오류';
-                    Swal.fire({
-                        title: "오류",
-                        text: errorMessage,
-                        icon: "error"
-                    });
-                });
+                }).fail(showError);
             }
         });
     });
@@ -244,6 +220,7 @@ $(document).ready(function() {
     calendar.render();
 });
 
+// 유효성 체크
 function isValidation(data){
     const startDay = new Date($('#todoStart').val());
     const endDay = new Date($('#todoEnd').val());
@@ -268,4 +245,10 @@ function isValidation(data){
     }
 
     return true;
+}
+
+// 에러처리
+function showError(jqXHR) {
+    const errorMessage = jqXHR.responseJSON ? jqXHR.responseJSON.message : '알 수 없는 오류';
+    Swal.fire({ title: "오류", text: errorMessage, icon: "error" });
 }
