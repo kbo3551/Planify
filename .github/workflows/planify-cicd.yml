@@ -36,7 +36,7 @@ jobs:
 
     # remote server to Docker image
     - name: Copy Docker image to server
-      uses: appleboy/scp-action@v0.2.1
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
