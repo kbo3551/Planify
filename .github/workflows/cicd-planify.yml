@@ -35,15 +35,11 @@ jobs:
 
     - name: Save Docker image to archive
       working-directory: Planify
-      run: docker save planify:latest | gzip > planify.tar.gz
+      run: docker save planify:latest | gzip > ../planify.tar.gz
 
-    # Verify paths and files after each step
-    - name: Verify directory and file structure
-      run: |
-        echo "Checking current directory contents:"
-        ls -lh
-        echo "Checking Planify directory contents:"
-        ls -lh Planify
+    # Verify saved Docker image
+    - name: Verify saved Docker image
+      run: ls -lh planify.tar.gz
 
     # Set file permissions for SSH private key
     - name: Set permissions for SSH private key
@@ -63,7 +59,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "Planify/planify.tar.gz"
+        source: "planify.tar.gz"
         target: "~/planify.tar.gz"
 
     # Deploy Docker container on server
