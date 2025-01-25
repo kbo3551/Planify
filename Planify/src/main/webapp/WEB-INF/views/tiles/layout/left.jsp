@@ -31,8 +31,8 @@
             <span>공지사항</span></a>
     </li>
 
-    <li class="nav-item" data-url="/chat/main">
-        <a class="nav-link" href="/chat/main">
+    <li class="nav-item" data-url="/chat/topic">
+        <a class="nav-link" href="/chat/topic">
             <i class="fas fa-fw fa-comments"></i>
             <span>실시간 채팅</span></a>
     </li>
