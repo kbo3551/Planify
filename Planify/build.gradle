@@ -30,17 +30,24 @@ dependencies {
 	// lombok
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.projectlombok:lombok:1.18.22'
-    	
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // Jdbc, Driver
+
+    // Jdbc, Driver
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    // JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.h2database:h2' // h2 : implementation 
+    // h2
+    implementation 'com.h2database:h2'
     
     // tiles
     implementation 'org.apache.tiles:tiles-core:3.0.8'
     implementation 'org.apache.tiles:tiles-api:3.0.8'
     implementation 'org.apache.tiles:tiles-jsp:3.0.8'
 
+    // OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // WebSocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
 tasks.named('test') {
