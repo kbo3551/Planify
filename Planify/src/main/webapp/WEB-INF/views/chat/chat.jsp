@@ -11,7 +11,6 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">실시간 채팅</h6>
-        <button type="button" class="btn btn-primary" id="createBtn" style="display: none;" data-toggle="modal" data-target="#createModal">등록</button>
     </div>
     <div class="card-body" >
         <div id="chat-box" class="border rounded p-3 mb-3" style="height: 300px; overflow-y: scroll;"></div>
