@@ -30,7 +30,13 @@
             <i class="fas fa-fw fa-table"></i>
             <span>공지사항</span></a>
     </li>
-    
+
+    <li class="nav-item" data-url="/chat/main">
+        <a class="nav-link" href="/chat/main">
+            <i class="fas fa-fw fa-comments"></i>
+            <span>실시간 채팅</span></a>
+    </li>
+
         <!-- Nav Item - Pages Collapse Menu -->
    <li class="nav-item" id="roleArea" >
 <!--        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"aria-expanded="true" aria-controls="collapseTwo"> -->
