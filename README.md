@@ -60,5 +60,7 @@ com.planify.main
 ![image](https://github.com/user-attachments/assets/4d039294-dc0c-4fcc-a5e5-a4bcf19443bc)
 ![image](https://github.com/user-attachments/assets/c2bd63c1-89eb-429a-a68e-792a96a4563a)
 ![image](https://github.com/user-attachments/assets/5961ac16-a780-48bb-a502-12c4d2afb554)
+![image](https://github.com/user-attachments/assets/d23b8231-1caa-4ab9-b826-e94b6824fce4)
+
 
 
