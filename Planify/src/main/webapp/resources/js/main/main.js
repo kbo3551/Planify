@@ -10,6 +10,7 @@ $(document).ready(function() {
         locale: 'ko', // 언어팩 한국어 지정
         initialView: 'dayGridMonth',
         contentHeight: 'auto', // 캘린더 높이 조절
+        displayEventEnd: true, // 종료 시간 표시
         headerToolbar: {
             left: 'prev,next today', // 이전, 다음, 오늘 버튼
             center: 'title',  // 달력 제목
@@ -91,22 +92,19 @@ $(document).ready(function() {
         dateClick: function (info) {
             // 선택한 날짜
             let selectedDate = new Date(info.date);
-            // 선택한 날짜 디폴트 12:00 AM 
-            let startDate = new Date(selectedDate.setHours(0, 0, 0, 0));
-            // +1일 12:00 AM
-            let nextDate = new Date(info.date);
-            let endDate = new Date(nextDate.setDate(nextDate.getDate() + 1));
-            endDate.setHours(0, 0, 0, 0);
-            // ISO 변환
-            const startDates = startDate.toISOString().slice(0, 16);
-            const endDates = endDate.toISOString().slice(0, 16);
+
+            let startDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 0, 0, 0, 0);
+
+            let endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 23, 59, 59, 999);
+
+            // ISO 형식으로 변환
+            const startDates = plan.util.formatToDateTimeISO(startDate); // 선택한 날짜의 00:00
+            const endDates = plan.util.formatToDateTimeISO(endDate); // 선택한 날짜의 23:59
 
             $('#todoId').val('');
             $('#title').val('');
-            // $('#todoStart').val(plan.util.getToDateTimeISO(0));
-            // $('#todoEnd').val(plan.util.getToDateTimeISO(1));
-            $('#todoStart').val(startDates);
-            $('#todoEnd').val(endDates);
+            $('#todoStart').val(startDates); // 시작 시간
+            $('#todoEnd').val(endDates); // 종료 시간
             $('#description').val('');
             $('#todoModal').modal('show');
             $('#todoRemoveBtn').hide();

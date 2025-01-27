@@ -210,17 +210,19 @@ window.plan.util = (function() {
     }
 
     /**
-     * 현재 날짜 및 시간을 ISO 형식으로 반환
-     * @param {number} 0,1,2,3
+     * 특정 날짜 및 시간을 ISO 형식으로 반환
+     * @param {Date} dateObj - 기준이 되는 날짜 객체 (기본값: 현재 시간)
+     * @param {number} offsetHours - 시간 오프셋 (기본값: 0)
+     * @returns {string} YYYY-MM-DDTHH:mm 형식의 문자열
      */
-    function getToDateTimeISO(offsetHours = 0) {
-        const now = new Date();
-        now.setHours(now.getHours() + offsetHours); // 시간에 offset 추가
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
+    function formatToDateTimeISO(dateObj = new Date(), offsetHours = 0) {
+        const date = new Date(dateObj); // 기존 날짜 객체 복사
+        date.setHours(date.getHours() + offsetHours); // 시간 오프셋 추가
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
     
@@ -270,7 +272,7 @@ window.plan.util = (function() {
         addClass : addClass,
         removeClass : removeClass,
         resetForm : resetForm,
-        getToDateTimeISO : getToDateTimeISO,
+        formatToDateTimeISO : formatToDateTimeISO,
         getToast: getToast,
         getAuthenticatedUserInfo : getAuthenticatedUserInfo,
     };
