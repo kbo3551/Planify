@@ -67,7 +67,7 @@ function webSocketConnect (){
     // WebSocket 설정
     const socket = new SockJS('/ws');
     const stompClient = StompJs.Stomp.over(socket);
-    // WebSocket 연결
+    // 채팅 구독
     stompClient.connect({}, function () {
         stompClient.subscribe('/topic/messages', function (response) {
             const message = JSON.parse(response.body);
