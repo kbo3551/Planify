@@ -50,8 +50,8 @@
                         <textarea class="form-control" id="description" name="description" rows="3" cols="3" style="resize: none;"></textarea>
                     </div>
                     <div class="modal-footer">
-	                    <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
 	                    <button type="button" id="todoRemoveBtn" class="btn btn-danger" style="display: none;">삭제</button>
+                        <button type="button" id="todoSaveBtn" class="btn btn-primary">저장</button>
                     </div>
                 </form>
             </div>
