@@ -5,9 +5,9 @@
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">일정 관리</h6>
     </div>
-    <div class="card-body">
-		<div class="col-lg-12">
-		    <div class="card mb-4">
+    <div class="card-body p-0">
+		<div class="col-lg-12 p-0">
+		    <div class="card">
 				<div id='calendar' style="width: 100%;"></div>
 			</div>
 		</div>
