@@ -51,20 +51,20 @@
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/member/profile">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                    마이페이지
                 </a>
 <!--                 <a class="dropdown-item" href="#"> -->
 <!--                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> -->
 <!--                     Settings -->
 <!--                 </a> -->
-                <a class="dropdown-item" href="http://localhost:8080/h2-console">
+                <a id="h2" class="dropdown-item" href="http://localhost:8080/h2-console" style="display: none">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     H2-Console
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout" >
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                    로그아웃
                 </a>
             </div>
         </li>
