@@ -1,7 +1,10 @@
 package com.planify.main.common;
 
 import org.springframework.http.HttpStatus;
-
+/**
+ * API 통신 Response 유틸
+ * @param <T>
+ */
 public class ApiResult<T> {
 
     private final int status;
