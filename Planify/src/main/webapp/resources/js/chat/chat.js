@@ -22,7 +22,7 @@ $(document).ready(function () {
     getSender();
     init();
 });
-
+// 메세지 전송
 function sendMessage() {
     const messageContent = $('#messageInput').val();
     const isNotice = $('#isNotice').is(':checked');
@@ -56,6 +56,7 @@ function renderMessage(message) {
     chatBox.scrollTop(chatBox[0].scrollHeight);
 }
 
+// 채팅 불러오기
 function loadMessages() {
     $.get("/api/chat/messages", function (messages) {
         messages.forEach(renderMessage);
@@ -76,6 +77,7 @@ function webSocketConnect (){
     });
 }
 
+// 초기설정
 function init(){
 
     plan.util.getAuthenticatedUserInfo().done(function(userInfo) {
