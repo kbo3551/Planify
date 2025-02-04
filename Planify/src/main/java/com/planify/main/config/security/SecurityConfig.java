@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // 개발 환경에서만 비활성화
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // H2 콘솔 접근 허용
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/h2-console/**").permitAll() // H2 DB 콘솔 허용
+                        .antMatchers("/swagger-ui/**", "/v3/api-docs/**","/h2-console/**").permitAll() // H2 DB 콘솔, Swagger 허용
                         .antMatchers("/", "/login", "/resources/**", "/register", "/api/login/**", "/public/**").permitAll() // 공개 경로
                         .antMatchers("/admin/**").hasRole("ADMIN") // 관리자 경로
                         .antMatchers("/main").authenticated() // 인증된 사용자만 접근 가능

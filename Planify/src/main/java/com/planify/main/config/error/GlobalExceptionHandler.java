@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.planify.main.common.ApiResult;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 /**
  * Controller Exception 처리
  */
@@ -13,6 +16,10 @@ import com.planify.main.common.ApiResult;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
+    @ApiResponses({
+        @ApiResponse(responseCode = "400", description = "잘못된 요청 데이터"),
+        @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
     public ResponseEntity<ApiResult<?>> handleIllegalArgumentException(IllegalArgumentException e) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
@@ -20,6 +27,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
+    @ApiResponses({
+        @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
     public ResponseEntity<ApiResult<?>> handleGenericException(Exception e) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
