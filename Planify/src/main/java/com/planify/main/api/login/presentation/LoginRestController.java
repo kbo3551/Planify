@@ -2,8 +2,6 @@ package com.planify.main.api.login.presentation;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,8 +18,12 @@ import com.planify.main.api.member.domain.Member;
 import com.planify.main.common.ApiResult;
 import com.planify.main.config.security.CustomUserDetails;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/login")
+@Tag(name = "로그인 API", description = "로그인 및 회원가입 관련 API")
 public class LoginRestController {
 
     private final LoginService loginService;
@@ -32,6 +34,7 @@ public class LoginRestController {
 
     // 회원가입
     @PostMapping("/register")
+    @Operation(summary = "회원가입", description = "새로운 사용자를 등록합니다.")
     public ApiResult<?> register(@RequestBody AddUserDTO addUserDTO) {
         try {
             loginService.register(
@@ -49,6 +52,7 @@ public class LoginRestController {
     }
 
     @PostMapping
+    @Operation(summary = "로그인", description = "사용자가 로그인합니다.")
     public ApiResult<?> login(@RequestBody Login login) {
         Member member = loginService.findByMemberId(login.getMemberId());
 

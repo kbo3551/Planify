@@ -48,6 +48,9 @@ dependencies {
 
     // WebSocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    
+    // Swagger UI
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
 }
 
 tasks.named('test') {
