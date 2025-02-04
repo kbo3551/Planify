@@ -22,20 +22,58 @@ TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 
 
 ```plaintext
 com.planify.main
-├── api
+├── api                       # 도메인별 API
+│   ├── chat
+│   │   ├── application       # 비즈니스 로직
+│   │   │   └── dto           # 데이터 전송 객체 (DTO)        
+│   │   ├── domain            # 도메인 모델 (Entity, Repository 인터페이스)
+│   │   ├── infrastructure    # 기술적 구현 (JPA Repository 등)
+│   │   └── presentation      # API 요청/응답 처리 (Controller)
 │   ├── login
 │   ├── member
-│   │   ├── application       // 비즈니스 로직
-│   │   ├── domain            // 핵심 도메인 모델 (Entity, Repository 인터페이스 등)
-│   │   ├── infrastructure    // 기술적 구현 (JPA Repository 등)
-│   │   ├── presentation      // API 요청/응답 처리 (Controller)
-│   │   └── value             // 값 객체 및 enum 클래스
-│   └── (도메인 패키지 추가)
+│   ├── notice
+│   ├── roles
+│   ├── todo
+│   └── (추가 도메인)
 ├── config
-│   ├── security              // 보안 설정 (Spring Security)
-│   └── tiles                 // Tiles 뷰 레이아웃 설정
-│   └── (설정 패키지 추가)
-├── web                       // View를 렌더링하는 컨트롤러 (JSP, Thymeleaf)
+│   ├── error                 # 예외 처리
+│   ├── security              # Spring Security 설정
+│   ├── socket                # 웹 소켓 관련 설정
+│   ├── tiles                 # Tiles 뷰 레이아웃 설정
+│   └── (추가 설정 패키지 )
+├── web                       # View를 렌더링하는 컨트롤러 (JSP, Thymeleaf)
+│   ├── chat
+│   ├── login
+│   ├── member
+│   ├── notice
+│   └── (기타 화면)
+├── resources                  # 정적 리소스 및 설정 파일
+│   ├── db                     # DB 관련 설정
+│   ├── static                 # 정적 파일 (CSS, JS, 이미지 등)
+│   ├── templates              # JSP, Thymeleaf 템플릿
+│   └── tiles                  # Tiles 설정
+├── webapp                     # JSP,Js,CSS 영역
+│   └── resources
+│       ├── favicon_io
+│       ├── image
+│       ├── js
+│       │   ├── bundle        # 라이브러리
+│       │   ├── chat
+│       │   ├── common        # 공통 함수
+│       │   ├── layout
+│       │   ├── login
+│       │   ├── member
+│       │   ├── notice
+│       │   ├── profile
+│       │   └── register
+│       ├── template
+│       │   ├── css
+│       │   ├── img
+│       │   ├── js
+│       │   │   └── demo
+│       │   └── vendor
+│       └── (기타 정적 리소스)
+└── Dockerfile               # Docker 컨테이너 빌드 설정
 ```
 ---
 
