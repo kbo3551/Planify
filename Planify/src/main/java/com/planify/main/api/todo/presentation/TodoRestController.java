@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Tag(name = "todo 관리 API", description = "Todo 관련 API")
+@Tag(name = "Todo 관리 API", description = "Todo 관련 API")
 public class TodoRestController {
 
     private final TodoService todoService;
