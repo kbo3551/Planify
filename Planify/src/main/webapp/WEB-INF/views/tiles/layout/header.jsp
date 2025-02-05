@@ -57,9 +57,13 @@
 <!--                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> -->
 <!--                     Settings -->
 <!--                 </a> -->
-                <a id="h2" class="dropdown-item" href="http://localhost:8080/h2-console" style="display: none">
+                <a id="h2" class="dropdown-item" href="/h2-console" style="display: none">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     H2-Console
+                </a>
+                <a id="h2" class="dropdown-item" href="/swagger-ui/index.html">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Swagger-UI
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout" >
