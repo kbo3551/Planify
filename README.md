@@ -15,6 +15,7 @@ TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 
 - **Tech**: OAuth2 (소셜로그인)
 - **Tech**: GitHub Actions (CI/CD)
 - **Tech**: Docker (CI/CD)
+- **Tech**: Swagger-UI (API docs)
 
 ---
 
@@ -99,6 +100,8 @@ com.planify.main
 ![image](https://github.com/user-attachments/assets/c2bd63c1-89eb-429a-a68e-792a96a4563a)
 ![image](https://github.com/user-attachments/assets/5961ac16-a780-48bb-a502-12c4d2afb554)
 ![image](https://github.com/user-attachments/assets/d23b8231-1caa-4ab9-b826-e94b6824fce4)
+![screencapture-planify-borhy-site-swagger-ui-index-html-2025-02-05-11_38_42](https://github.com/user-attachments/assets/ca9be46c-9d61-44b6-bb33-10af66398eb4)
+
 
 
 
