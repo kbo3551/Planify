@@ -55,5 +55,5 @@ jobs:
         docker pull ${{ secrets.DOCKER_USERNAME }}/planify:latest
         docker stop planify || true
         docker rm planify || true
-        docker run -d --name planify -p 9350:8080 ${{ secrets.DOCKER_USERNAME }}/planify:latest
+        docker run -d --name planify --memory=256m --memory-swap=256m -p 9350:8080 ${{ secrets.DOCKER_USERNAME }}/planify:latest
         EOF
