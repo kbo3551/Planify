@@ -82,7 +82,7 @@ com.planify.main
 
 - **Domain-Driven Design (DDD)**: 도메인 중심의 설계를 기반으로 각 도메인을 명확히 분리하여 비즈니스 로직을 관리 원칙
 - **패키지 책임 분리**: 각 레이어(application, domain, infrastructure, presentation)는 명확한 역할을 가지며 유지보수성과 확장성을 극대화
-- **경량 데이터베이스**: H2 데이터베이스를 활용하여 간편한 테스트 환경을 제공
+- **경량 데이터베이스**: H2 데이터베이스를 활용하여 간편한 환경을 제공
 
 ---
 
