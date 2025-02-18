@@ -16,6 +16,8 @@ TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 
 - **Tech**: GitHub Actions (CI/CD)
 - **Tech**: Docker (CI/CD)
 - **Tech**: Swagger-UI (API docs)
+- **Tech**: NginX (Web)
+- **Tech**: tomcat9 (Was)
 
 ---
 
