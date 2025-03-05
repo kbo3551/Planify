@@ -15,10 +15,10 @@
                                     </div>
                                     <form class="user" id="loginForm">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="memberId" placeholder="Enter ID">
+                                            <input type="text" class="form-control form-control-user" id="memberId" placeholder="Enter ID" value="test">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" id="password" placeholder="Password" value="1234">
                                         </div>
 <!--                                         <div class="form-group"> -->
 <!--                                             <div class="custom-control custom-checkbox small"> -->
