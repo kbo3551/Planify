@@ -1,6 +1,6 @@
 # Planify
 
-TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 통해 자동화된 빌드를 통한 배포환경 구성
+TODO 관리 프로젝트로 Spring Boot와 JPA를 활용하여 진행 및 CI/CD 통해 자동화된 빌드를 통한 배포환경 구성 
 
 ---
 
